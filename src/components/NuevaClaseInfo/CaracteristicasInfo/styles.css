@@ -1,0 +1,296 @@
+.app{
+    background: url(https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png) 0% 0% / 100% 100% no-repeat !important;
+    position: absolute !important;
+    height: 100% !important;
+    width: 100% !important;
+    z-index: -1 !important;
+    overflow: hidden !important;
+    display: flex;
+}
+
+
+.contenedor{
+    height: 100vh !important;
+    justify-content: center !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    max-width: 720px !important;
+    min-width: 100px !important;
+    flex-direction: column;
+}
+
+.rightSide{
+    width: 80%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+}
+
+.rightSide h2{
+    margin: 0px !important;
+    padding-bottom: 2px !important;
+}
+
+.rightSide h2 label{
+    font-size: 22px !important;
+    line-height: 28px !important;
+    color: rgb(34, 34, 34) !important;
+    font-weight: 600 !important;
+    padding: 0px !important;
+}
+
+.rightSide .text{
+    color: rgb(113, 113, 113) !important;
+    font-weight: 400 !important;
+    padding-bottom: 24px !important;
+    padding-top: 8px !important;
+}
+
+.rightSide .textArea__div{
+    width: 100% !important;
+    box-shadow: grey 0px 0px 0px 1px inset !important;
+    border-radius: 8px !important
+}
+
+.rightSide .textArea__div textarea{
+    padding: 24px !important;
+    max-height: 50vh !important;
+    color: rgb(34, 34, 34) !important;
+    display: block !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    outline: none !important;
+    border: none !important;
+    margin: 0px !important;
+    box-sizing: border-box !important;
+    background-color: transparent !important;
+    appearance: none !important;
+    resize: vertical !important;
+    max-height: 25vh !important;
+    min-height: 144px !important;
+    padding: 24px !important;
+    max-height: 50vh !important;
+    font-size: 18px !important;
+    line-height: 28px !important;
+    text-overflow: ellipsis !important;
+    font-weight: 600 !important;
+    overflow-y: hidden !important;
+    border-radius: 8px !important;
+}
+
+.leftSide__content{
+    margin-left: min(10%, 56px) !important;
+    max-width: 75% !important;
+    margin-right: 24px !important;
+    width: 100% !important;
+    color: rgb(255, 255, 255) !important;
+    transition: -ms-transform 0.5s ease-out 0s, -webkit-transform 0.5s ease-out 0s, transform 0.5s ease-out 0s !important;
+}
+
+.leftSide__content h1{
+    font-size: 48px !important;
+    line-height: 56px !important;
+    margin-bottom: 12px !important;
+    font-weight: 600 !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.option-div{
+    display: inline-block !important;
+    white-space: nowrap !important;
+    padding-right: 10px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    --maxWidth: 1120px;
+    font-size: 14px;
+    line-height: 1.43;
+    color: #484848;
+}
+
+.option-button{
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid rgb(221, 221, 221) !important;
+    outline: none;
+    margin: 0px;
+    position: relative;
+    transition-property: -ms-transform, -webkit-transform, transform, background-color, border-color;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+    padding: 10px 20px;
+    border-radius: 30px;
+    min-width: 59px;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    
+    text-align: center !important;
+}
+
+.inactive{
+    background-color: rgb(255, 255, 255);
+    color: rgb(34, 34, 34);
+}
+
+.active{
+    background-color: rgb(34, 34, 34);
+    color: rgb(255, 255, 255);
+}
+
+.option-span{
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    width: 58px !important;
+    padding: 0px 6px !important;
+    text-align: center !important;
+}
+
+.subtitle{
+    font-size: 22px !important;
+    line-height: 26px !important;
+    color: rgb(34, 34, 34) !important;
+    font-weight: 600 !important;
+    padding-bottom: 0px !important;
+}
+
+.priceContainer{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.secondPriceContainer{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: unset !important;
+    height: unset !important;
+    color: rgb(34, 34, 34) !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    min-height: unset !important;
+}
+
+.price{
+    text-align: center !important;
+    min-width: 48px !important;
+    position: relative !important;
+    cursor: text !important;
+    display: flex !important;
+    min-height: auto !important;
+    width: 100% !important;
+    margin: 0px !important;
+    border: none !important;
+    color: black !important;
+    background-color: inherit !important;
+    height: auto !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 400 !important;
+    display: flex !important;
+    margin-top: 0px !important;
+    border-radius: 8px !important;
+    box-shadow: rgb(176 176 176) 0px 0px 0px 1px inset !important;
+    color: rgb(34, 34, 34) !important;
+    background-color: rgb(255, 255, 255) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    opacity: 1 !important;
+}
+
+.priceInput{
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0px !important;
+    margin: 8px 12px !important;
+    min-height: 1px !important;
+    color: inherit !important;
+    background-color: transparent !important;
+    font-family: inherit !important;
+    font-size: 48px !important;
+    font-weight: 600 !important;
+    line-height: 80px !important;
+    appearance: none !important;
+    text-align: inherit !important;
+}
+
+.priceButton{
+    width: 48px !important;
+    height: 48px !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: rgb(176, 176, 176) !important;
+    color: rgb(113, 113, 113) !important;
+    font-family: inherit !important;
+    outline: none !important;
+    touch-action: manipulation !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgb(255, 255, 255) !important;
+    border-radius: 50% !important;
+    font-size: 100%;
+}
+
+input[type=time] {
+    border: none;
+    color: #2a2c2d;
+    font-size: 14px;
+    font-family: helvetica;
+    width: 180px;
+  }
+  
+  /* Wrapper around the hour, minute, second, and am/pm fields as well as 
+  the up and down buttons and the 'X' button */
+  input[type=time]::-webkit-datetime-edit-fields-wrapper {
+    display: flex;
+  }
+  
+  /* The space between the fields - between hour and minute, the minute and 
+  second, second and am/pm */
+  input[type=time]::-webkit-datetime-edit-text {
+    padding: 19px 4px;
+  }
+  
+  /* The naming convention for the hour, minute, second, and am/pm field is
+  `-webkit-datetime-edit-{field}-field` */
+  
+  /* Hour */
+  input[type=time]::-webkit-datetime-edit-hour-field {
+    background-color: #f2f4f5;
+    border-radius: 15%;
+    padding: 19px 13px;
+  }
+  
+  /* Minute */
+  input[type=time]::-webkit-datetime-edit-minute-field {
+    background-color: #f2f4f5;
+    border-radius: 15%;
+    padding: 19px 13px;
+  }
+  
+  /* 'X' button for resetting/clearing time */
+  input[type=time]::-webkit-clear-button {
+    display: none;
+  }
+  
+  /* Up/Down arrows for incrementing/decrementing the value */
+  input[type=time]::-webkit-inner-spin-button {
+    display: none;
+  }

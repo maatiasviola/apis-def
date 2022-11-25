@@ -1,0 +1,42 @@
+.app{
+    background: url(https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png) 0% 0% / 100% 100% no-repeat !important;
+    position: absolute !important;
+    height: 100% !important;
+    width: 100% !important;
+    z-index: -1 !important;
+    overflow: hidden !important;
+    display: flex;
+}
+
+
+.contenedor{
+    height: 100vh !important;
+    justify-content: center !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.rightSide{
+    background-color: white;
+}
+
+.leftSide__content{
+    margin-left: min(10%, 56px) !important;
+    max-width: 75% !important;
+    margin-right: 24px !important;
+    width: 100% !important;
+    color: rgb(255, 255, 255) !important;
+    transition: -ms-transform 0.5s ease-out 0s, -webkit-transform 0.5s ease-out 0s, transform 0.5s ease-out 0s !important;
+}
+
+.leftSide__content h1{
+    font-size: 48px !important;
+    line-height: 56px !important;
+    margin-bottom: 12px !important;
+    font-weight: 600 !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+

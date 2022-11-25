@@ -1,0 +1,99 @@
+.card{
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+
+.cardSub{
+    background-color: white;
+    padding: 22px 20px;
+}
+
+.cardSub > *{
+    margin: 8px 0;
+}
+
+.cardSub h4{
+    height:50px;
+}
+.infoText{
+    color: #4d4d4d;
+}
+
+.profile{
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.profilePhotoContainer{
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.profilePhoto{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profileName{
+    font-weight: bold;
+}
+
+.profileDate{
+    color: #4d4d4d;
+}
+
+.containerStyle{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.buttons-container{
+    margin-top: 20px;
+}
+
+
+.continue-div{
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+.continue-button{
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 10px;
+    font-weight: 600;
+    border-radius: 8px ;
+    outline: none;
+    padding: 14px 24px;
+    border: none;
+    width: 100%;
+}
+
+.confirmar{
+    background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+    color: rgb(255, 255, 255);
+}
+
+.cancelar{
+    background:rgb(255, 255, 255) ;
+    color:rgb(227, 28, 95);
+    border: 1px solid #DDDDDD;
+
+}
+
+.continue-span{
+    display: block;
+    position: relative;
+    text-align: center;
+}

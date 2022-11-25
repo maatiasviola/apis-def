@@ -1,0 +1,38 @@
+.button {
+	display: flex;
+	height: 50px;
+	padding: 0;
+	background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	overflow: hidden;
+	font-family: "Quicksand", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.button:hover {
+	opacity: 0.8;
+}
+
+
+.button__text,
+.button__icon {
+	display: inline-flex;
+	align-items: center;
+	padding: 0 24px;
+	color: #fff;
+	height: 100%;
+	text-decoration: none;
+}
+
+span{
+	text-decoration: none;
+}
+
+.button__icon {
+	font-size: 1.5em;
+	background: rgba(0, 0, 0, 0.08);
+}

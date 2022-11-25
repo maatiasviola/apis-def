@@ -1,0 +1,10 @@
+.politicasSpan{
+    font-weight: 800;
+}
+
+.politicasAnchor{
+    color: rgb(0, 76, 196);
+    text-decoration: underline;
+    border-radius: 4px;
+    font-weight: 600;
+}
