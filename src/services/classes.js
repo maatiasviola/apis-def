@@ -11,4 +11,16 @@ const getOneClass = ({id}) =>{
     return request.then(response=>response.data.data)
 }
 
-export default {getAllClasses,getOneClass}
+const create = (newObject,{token})=>{
+    console.log("TOKEN: ",token)
+    console.log("OBJETO QUE LLEGA SERVICIO: ",newObject)
+    const config={
+        headers:{
+            authorization: token
+        }
+    }
+    const request= axios.post(URL,newObject,config)
+    return request.then(response=>console.log("RESPUESTA: ",response))
+}
+
+export default {getAllClasses,getOneClass,create}

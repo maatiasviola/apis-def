@@ -1,14 +1,11 @@
 import React from 'react'
-import './styles.css'
 import {Box,Grid, Typography} from '@mui/material'
 import {scrollableOptions} from '../../../data/scrollableDataOptions'
 import PrevNextButtons from '../../PrevNextButtons'
 
 function CategoriaInfo({page,setPage,claseData,setClaseData}) {
-    
   return (
     <Box sx={{
-        background: 'url(https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png) 0% 0% / 100% 100% no-repeat !important',
         position: 'absolute' ,
         height: '100%',
         width: '100%',
@@ -17,6 +14,7 @@ function CategoriaInfo({page,setPage,claseData,setClaseData}) {
         display: 'flex'
     }}>
         <Box sx={{
+            background: 'url(https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png) 0% 0% / 100% 100% no-repeat !important',
             height: '100vh' ,
             justifyContent: 'center' ,
             display: 'flex' ,
@@ -54,6 +52,7 @@ function CategoriaInfo({page,setPage,claseData,setClaseData}) {
             alignItems: 'center',
             width: '100%',
             flexDirection: 'column',
+            background:'white'
             }}
         >    
             <Typography component='h2' sx={{
@@ -81,7 +80,7 @@ function CategoriaInfo({page,setPage,claseData,setClaseData}) {
                                     key={categoria.id} 
                                     item xs={12} sm={4} md={4} lg={3} 
                                     style={{height:'100%'}}
-                                    onClick={(e)=>setClaseData({...claseData,categoria:categoria.id})}
+                                    onClick={(e)=>setClaseData({...claseData,categoria:categoria.id.toString()})}
                                 >    
                                     <Box 
                                         component='button' 
@@ -103,7 +102,10 @@ function CategoriaInfo({page,setPage,claseData,setClaseData}) {
                                             '&:hover':{
                                                 borderColor: 'transparent',
                                                 boxShadow:'rgb(0 0 0) 0px 0px 0px 2px'
-                                            }
+                                            },
+                                            borderColor: claseData.categoria==categoria.id && 'transparent',
+                                            boxShadow:claseData.categoria==categoria.id && 'rgb(0 0 0) 0px 0px 0px 2px'
+                                            
                                         }}
                                     >
                                         <Box sx={{

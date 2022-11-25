@@ -198,7 +198,7 @@ function CaracteristicasInfo({page,setPage,claseData,setClaseData}) {
                         onChange={(e)=>setClaseData({...claseData,duracion:e.target.value})}
                     />
                 </div>
-                <PrevNextButtons page={page} setPage={setPage}/>
+                <PrevNextButtons page={page} setPage={setPage} claseData={claseData} setClaseData={setClaseData}/>
             </Box>
         </Box>
         </Box>

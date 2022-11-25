@@ -2,6 +2,7 @@ import React from 'react'
 import CardComentario from '../CardComentario'
 import {Box} from '@mui/material'
 function Comentarios({comentarios}) {
+  console.log("COMENTARIOS: ",comentarios)
   return (
     <Box sx={{
       maxWidth: 1000,
@@ -10,7 +11,7 @@ function Comentarios({comentarios}) {
       p: '1.25rem'
       }}
     >
-    {comentarios.map(comentario=><CardComentario comentario={comentario}/>)}
+    {comentarios.map(comentario=><CardComentario key={comentario.id} comentario={comentario}/>)}
   </Box>
   )
 }

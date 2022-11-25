@@ -1,15 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext,useState,useEffect } from 'react'
 import {Box, Link,Typography} from '@mui/material'
 import {BiBlock} from 'react-icons/bi'
 import UserContext from '../../context/UserContext'
+import usersService from '../../services/users'
+
 function CardComentario({comentario}) {
     //Si el comentario esta bloqueado hacer un display none
     const {user} = useContext(UserContext)
-    console.log("COMENTARIO: ",comentario)
+    const [usuarioComentario,setUsuarioComentario]=useState({})
+    useEffect(()=>{
+        usersService.getUser({id:comentario.usuario})
+        .then(user=>
+          setUsuarioComentario(user)
+        )
+      },[])
+    
     const handleToggleComentario=(event)=>{
         //cambiar estado de comentario
     }
 
+    if((Object.keys(usuarioComentario).length===0)){
+        return <h1>Cargando</h1>
+    }
     //si usuario no es profesor ve comentarios disponibles
     //si usuario es profesor ve comentarios bloqueados con menor opacidad y debe poder volverlos a la vida
   return (
@@ -35,7 +47,7 @@ function CardComentario({comentario}) {
                     position: 'static'
                 }}
                 alt='' 
-                src={comentario.usuario.avatar}
+                src={usuarioComentario.avatar}
             />
         </Box>
         <Box sx={{
@@ -50,7 +62,7 @@ function CardComentario({comentario}) {
                     mr: '0.25rem'
                     }}
                 >
-                    {comentario.usuario.nombre} {comentario.usuario.apellido}
+                    {usuarioComentario.nombre} {usuarioComentario.apellido}
                 </Typography>
                 <Typography component='span' sx={{
                     fontSize: '0.8rem',

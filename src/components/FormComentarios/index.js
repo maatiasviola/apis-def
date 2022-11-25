@@ -26,7 +26,8 @@ function FormComentarios({claseId,claseElegida,setClaseElegida}) {
             .createComment(comentarioObject,{token})
             .then(returnedComment=>{
                 console.log("RETURNED COMMENT: ",returnedComment)
-                setClaseElegida({...setClaseElegida,comentarios:claseElegida.comentarios.concat(returnedComment)})
+                setClaseElegida({...claseElegida,comentarios:claseElegida.comentarios.concat(returnedComment)})
+                console.log("CLASE ACTUALIZADA: ",claseElegida)
                 setNuevoComentario('')
             })
 

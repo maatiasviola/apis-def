@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useEffect } from 'react'
 import {Box,Grid} from '@mui/material'
 import CardContratacion from '../CardContratacion'
 import{contrataciones,profesores} from '../../data/coursesData'
@@ -6,6 +6,7 @@ import UserContext from '../../context/UserContext'
 
 function Contrataciones() {
     const {user} = useContext(UserContext)
+
     const profesor= profesores.find(profesor=>profesor.idUsuario=user.idUsuario)
   
     const contratacionesToShow = contrataciones.filter(contratacion=>contratacion.idProfesor=profesor.idProfesor && contratacion.estado==='pendiente')

@@ -5,7 +5,6 @@ import PrevNextButtons from '../../PrevNextButtons'
 function DescripcionInfo({page,setPage,claseData,setClaseData}) {
   return (
     <Box sx={{
-        background: 'url(https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png) 0% 0% / 100% 100% no-repeat',
         position: 'absolute' ,
         height: '100%' ,
         width: '100%' ,
@@ -14,6 +13,17 @@ function DescripcionInfo({page,setPage,claseData,setClaseData}) {
         display: 'flex',
         }}
     >
+        <Box sx={{
+            background: 'url(https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png) 0% 0% / 100% 100% no-repeat !important',
+            height: '100vh' ,
+            justifyContent: 'center' ,
+            display: 'flex' ,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            flexDirection: 'column',
+            }}
+        >
         <Container sx={{
             height: '100vh' ,
             justifyContent: 'center' ,
@@ -43,6 +53,7 @@ function DescripcionInfo({page,setPage,claseData,setClaseData}) {
                 </Typography>
             </Box>
         </Container>
+        </Box>
         <Box sx={{background:'white',height:'100%',width:'100%'}}>
         <Container sx={{
             height: '100vh' ,
@@ -115,11 +126,11 @@ function DescripcionInfo({page,setPage,claseData,setClaseData}) {
                             overflowY: 'hidden',
                             borderRadius: '0.5rem',
                         }} 
-                        value={claseData.titulo} 
+                        value={claseData.nombre} 
                         rows={2} 
                         placeholder='Guitarra para principiantes' 
                         autoComplete='off'
-                        onChange={(e)=>setClaseData({...claseData,titulo:e.target.value})}
+                        onChange={(e)=>setClaseData({...claseData,nombre:e.target.value})}
                     />
                 </Box>
             </Box>

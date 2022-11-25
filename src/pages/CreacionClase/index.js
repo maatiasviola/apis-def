@@ -9,17 +9,17 @@ function CreacionClase() {
   
   const [page,setPage]=useState(0)
   const [claseData,setClaseData]=useState({
-    titulo:"",
+    nombre:"",
     descripcion:"",
+    tipo:"",
     categoria:"",
-    imagen:"",
-    duracion:"",
     frecuencia:"",
+    duracion:"",
     costo:"",
-    tipo:""
+    imagen:""
   })
 
-  console.log(page)
+  console.log(claseData)
   
   const componentList=[
     <DescripcionInfo page={page} setPage={setPage} claseData={claseData} setClaseData={setClaseData}/>,

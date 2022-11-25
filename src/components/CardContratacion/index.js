@@ -1,7 +1,7 @@
 import React, { useState }  from 'react'
 import './styles.css'
 import {clases,usuarios} from '../../data/coursesData'
-import {Box} from '@mui/material'
+import {Box, Typography} from '@mui/material'
 
 function CardContratacion({contratacion}) {
     const claseContratada = clases.find(clase=>clase.idClase===contratacion.idClase)
@@ -31,7 +31,7 @@ function CardContratacion({contratacion}) {
         <Box className='cardSub'>
             <h4>Motivo: {contratacion.motivoInteres}</h4>
            
-            <p className='infoText'>{usuarioElegido.email}</p>
+            <Typography component='p' sx={{color: '#4d4d4d'}}>{usuarioElegido.email}</Typography>
             <p className='infoText'>Tel: {usuarioElegido.nroTelefono}</p>
             <div className='profile'>
                 <div className='profilePhotoContainer'>

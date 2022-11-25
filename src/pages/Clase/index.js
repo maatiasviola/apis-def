@@ -13,6 +13,7 @@ import FormComentarios from '../../components/FormComentarios';
 
 function Clase() {
     const [claseElegida,setClaseElegida]=useState({})
+    console.log("CLASE ELEGIDA: ",claseElegida)
     const {id} = useParams();
     
     useEffect(()=>{
@@ -27,7 +28,6 @@ function Clase() {
             claseElegida.tipo || 'grupal',
             'Superclase'
         ]
-        console.log("carac ",caracteristicasClase)
     
 
     console.log(claseElegida)
@@ -45,7 +45,6 @@ function Clase() {
             calificacionGeneral=result.calificacion
         }
     }
-    console.log(calificacionGeneral)
   
     if((Object.keys(claseElegida).length===0)){
         return <h1>Cargando</h1>
@@ -166,7 +165,6 @@ function Clase() {
                                     }}
                                 >
                                     {caracteristicasClase.map((item,index)=>{
-                                        console.log(index)
                                         return(
                                             <>
                                             <Box sx={{mr:'0.25rem'}} component='span' key={item}>{item}

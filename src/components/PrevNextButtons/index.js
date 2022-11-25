@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Box,Button} from '@mui/material'
+import UserContext from '../../context/UserContext'
+import classesService from '../../services/classes'
+import { useNavigate } from 'react-router-dom';
 
-function PrevNextButtons({page,setPage}) {
+function PrevNextButtons({page,setPage,claseData={}}) {
   const prevButtonVisible = page===0 ? 'none' : ''
-  
+  const {user}=useContext(UserContext)
+  const navigate = useNavigate();
+  const {token}=user
   const handleClickNext = ()=>{
-    page===3 
-    ? alert('Clase creada')
-    : setPage(page+1)
+    if(page===3){
+      classesService.create(claseData,{token})
+      .then(returnedClass=>{
+        navigate('/')
+      })
+    } else{
+      setPage(page+1)
+    }
   }
 
   const handleClickPrev=()=>{
