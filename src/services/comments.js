@@ -13,7 +13,7 @@ const createComment = (newObject,{token}) =>{
     return request.then(response=>response.data.createdComment)
 }
 
-const blockComment = ({id},{token}) => {
+const blockComment = ({id,token}) => {
     const config ={
         headers:{
             authorization: token
@@ -23,4 +23,14 @@ const blockComment = ({id},{token}) => {
     return request.then(response=>response.data)
 }
 
-export default {createComment, blockComment}
+const removeComment = ({id,token}) => {
+    const config={
+        headers:{
+            authorization: token
+        }
+    }
+    const request= axios.delete(`${URL}/${id}`,config)
+    return request.then(response=>response)
+}
+
+export default {createComment,blockComment,removeComment}

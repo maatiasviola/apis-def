@@ -23,4 +23,34 @@ const create = (newObject,{token})=>{
     return request.then(response=>console.log("RESPUESTA: ",response))
 }
 
-export default {getAllClasses,getOneClass,create}
+const updateClass = ({newObject,id,token})=>{
+    const config={
+        headers:{
+            authorization: token
+        }
+    }
+    const request= axios.put(`${URL}/${id}`,newObject,config)
+    return request.then(response=>response)
+}
+
+const removeClass = ({id,user_role,token}) => {
+    const config={
+        headers:{
+            authorization: token
+        }
+    }
+    const request= axios.delete(`${URL}/${id}`,{user_role},config)
+    return request.then(response=>response)
+}
+
+const unrollStudent = ({estudianteId,user_role,token}) => {
+    const config={
+        headers:{
+            authorization: token
+        }
+    }
+    const request= axios.put(`${URL}/unrollStudent/${estudianteId}`,{user_role},config)
+    return request.then(response=>response)
+}
+
+export default {getAllClasses,getOneClass,create,updateClass,removeClass,unrollStudent}

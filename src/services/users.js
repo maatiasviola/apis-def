@@ -6,5 +6,10 @@ const getUser =  ({id}) =>{
     return request.then(response=>response.data.data)
 }
 
+const createUser = (newObject) => {
+    console.log("USUARIO QUE LLEGA AL SERVICIO: ",newObject)
+    const request= axios.post(URL,newObject)
+    return request.then(response=>response)
+}
 
-export default {getUser}
+export default {getUser,createUser}

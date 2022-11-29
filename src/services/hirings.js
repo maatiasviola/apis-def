@@ -12,4 +12,24 @@ const createHiring = (newObject, {token}) => {
     return request.then(response=>response.data.createdComment)
 }
 
-export default {createHiring}
+const approveHiring = ({constratacionId,user_role,token}) => {
+    const config ={
+        headers:{
+            authorization: token
+        }
+    }
+    const request = axios.put(`${URL}/approve`,{constratacionId,user_role},config)
+    return request.then(response=>response.data)
+}
+
+const removeHiring = ({id,token}) => {
+    const config ={
+        headers:{
+            authorization: token
+        }
+    }
+    const request = axios.delete(`${URL}/${id}`,config)
+    return request.then(response=>response)
+}
+
+export default {createHiring, approveHiring, removeHiring}
