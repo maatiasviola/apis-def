@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState, useContext} from 'react'
 import {Container,CssBaseline,Box,Dialog,IconButton,Typography, List, ListItem} from '@mui/material'
 import {Link,useParams} from 'react-router-dom';
 import Header from '../../components/Header';
@@ -10,8 +10,15 @@ import Button from '../../components/Button';
 import CardComentario from '../../components/CardComentario';
 import Comentarios from '../../components/Comentarios';
 import FormComentarios from '../../components/FormComentarios';
+import UserContext from '../../context/UserContext'
+import userEvent from '@testing-library/user-event';
+import useClass from '../../hooks/useClass';
+
 
 function Clase() {
+
+    const {user}=useContext(UserContext)
+
     const [claseElegida,setClaseElegida]=useState({})
     console.log("CLASE ELEGIDA: ",claseElegida)
     const {id} = useParams();
@@ -309,7 +316,7 @@ function Clase() {
                                 </Box>
                                 </Box>
                             </Box>
-                            <Button>
+                            <Button disabled={!user || user.rol=='profesor'}>
                                 Contratar
                             </Button>
                         </Box>
@@ -368,10 +375,12 @@ function Clase() {
                 </Box>
                 <Box>
                     <Comentarios comentarios={claseElegida.comentarios}/>
+                    {user &&
                     <FormComentarios 
                         claseId={claseElegida.id} setClaseElegida={setClaseElegida}
                         claseElegida={claseElegida}
                     />
+                    }
                 </Box>
             </Container>
         </Box>

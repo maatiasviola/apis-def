@@ -4,7 +4,7 @@ import classesService from '../../services/classes'
 //recuadro para cada clase que existe
 import CardClase from '../CardClase'
 
-function Clases({categoryFilter}) {
+function Clases({categoryFilter, filters}) {
   const [classes,setClasses]=useState([])
   
   useEffect(()=>{
@@ -14,7 +14,7 @@ function Clases({categoryFilter}) {
     })
   },[])
   console.log(classes)
-  const classesToShow = classes.filter(clase=>clase.categoria==categoryFilter)
+  const classesToShow = classes.filter(clase=>clase.categoria==categoryFilter )
 
     
   return (

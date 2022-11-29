@@ -13,4 +13,14 @@ const createComment = (newObject,{token}) =>{
     return request.then(response=>response.data.createdComment)
 }
 
-export default {createComment}
+const blockComment = ({id},{token}) => {
+    const config ={
+        headers:{
+            authorization: token
+        }
+    }
+    const request = axios.put(`${URL}/${id}`,config)
+    return request.then(response=>response.data)
+}
+
+export default {createComment, blockComment}

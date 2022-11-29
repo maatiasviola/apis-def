@@ -9,26 +9,16 @@ import {Link} from 'react-router-dom'
 import {FaRegHeart} from 'react-icons/fa'
 import {AiFillStar} from 'react-icons/ai'
 
+import useClass from '../../hooks/useClass';
+
 function CardClase({clase}) {
-    const {id,nombre,tipo,frecuencia,calificaciones,imagen}=clase
 
-    let calificacionGeneral = 0
+    const {claseCalculada} = useClass()
 
-    if(!(Object.keys(clase).length===0)){
-        if(calificaciones.length!==0){ 
-            const result = calificaciones.reduce(function(acumulador,siguienteValor){
-                return{
-                    calificacion : acumulador.calificacion + siguienteValor.calificacion
-                }
-                })
-            calificacionGeneral=result.calificacion
-        }
-        
-    }
-    console.log(calificacionGeneral)
- 
+    const claseNueva = claseCalculada({clase})
+
   return (
-    <LinkMUI component={Link} to={`/clases/${id}`}>
+    <LinkMUI component={Link} to={`/clases/${claseNueva.id}`}>
             <Box sx={{
                     flexGrow:1,
                     position:'relative'
@@ -54,8 +44,8 @@ function CardClase({clase}) {
                         width:'100%',
                         borderRadius:3
                     }}
-                    src={imagen} 
-                    alt={nombre}
+                    src={claseNueva.imagen} 
+                    alt={claseNueva.nombre}
                 />
 
                 <Box sx={{
@@ -64,21 +54,21 @@ function CardClase({clase}) {
                     }}
                 >
                     <Box sx={{mt:2}}>
-                        <Typography component='h3'>{nombre}</Typography>
-                        <Typography component='h4'>{frecuencia}</Typography>
-                        <Typography component='h5'>{tipo}</Typography>
+                        <Typography component='h3'>{claseNueva.nombre}</Typography>
+                        <Typography component='h4'>{claseNueva.frecuencia}</Typography>
+                        <Typography component='h5'>{claseNueva.tipo}</Typography>
                     </Box>
                     <Box sx={{mt:2}}>
                         <Box sx={{display:'flex'}}>
                             {
-                                calificacionGeneral===0 ? (
+                                claseNueva.calificacionGeneral===0 ? (
                                     <>
                                         <Typography component='h5'>Nueva</Typography>
                                         <AiFillStar size={18}/>
                                     </>
                                 ) : (
                                     <>
-                                        <Typography component='h5'>{calificacionGeneral}</Typography>
+                                        <Typography component='h5'>{claseNueva.calificacionGeneral}</Typography>
                                         <AiFillStar size={18}/>
                                     </>
                                 ) 

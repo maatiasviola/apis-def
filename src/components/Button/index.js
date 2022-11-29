@@ -4,7 +4,7 @@ import React from 'react'
 //components
 import {Box,Button as MUIButton} from '@mui/material'
 
-function Button({children,onClick}) {
+function Button({children,onClick,disabled}) {
   return (
     <Box sx={{
         my: 2 
@@ -22,6 +22,7 @@ function Button({children,onClick}) {
             color: 'rgb(255, 255, 255)',
             width: '100%'
           }} 
+          disabled= {disabled}
         >
           {children}
         </MUIButton>

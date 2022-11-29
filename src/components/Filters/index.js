@@ -14,19 +14,10 @@ import {tiposClase} from '../../data/scrollableDataOptions'
 import {frecuenciasClase} from '../../data/scrollableDataOptions'
 import StyledFilterButton from '../StyledFilterButton';
 
-function Filters({filtersModal,showFiltersModal}) {
-    const [filters,setFilters]=useState({
-      tipo:'Cualquiera',
-      frecuencia:'Cualquiera',
-      calificacion1:0,
-      calificacion2:5
-    })
-
-    console.log(filters)
+function Filters({filtersModal,showFiltersModal, setFilters, filters}) {
 
     const handleChangeCalification = (event)=>{
-        setFilters({...filters,calificacion1:event.target.value[0]})
-        setFilters({...filters,calificacion2:event.target.value[1]})
+        setFilters({...filters,calificacion1:event.target.value[0],calificacion2:event.target.value[1]})
     }
 
   return (
@@ -140,7 +131,7 @@ function Filters({filtersModal,showFiltersModal}) {
                       onChange={handleChangeCalification}
                       min={0}
                       max={5}
-                      defaultValue={[1,5]}
+                      defaultValue={[filters.calificacion1,filters.calificacion2]}
                       step={0.1}
                       values={[filters.calificacion1,filters.calificacion2]}
                   />
@@ -151,8 +142,7 @@ function Filters({filtersModal,showFiltersModal}) {
                       readOnly: true,
                     }}
                     value={filters.calificacion1}
-                    onChange={(e)=>setFilters({...filters,calificacion1:e.target.value})}
-                  />
+                  /> 
                   
                   <TextField
                     label="Max"
@@ -160,7 +150,6 @@ function Filters({filtersModal,showFiltersModal}) {
                       readOnly: true,
                     }}
                     value={filters.calificacion2}
-                    onChange={(e)=>setFilters({...filters,calificacion2:e.target.value})}
                   /> 
                   </Box>       
                 </Box>
