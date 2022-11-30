@@ -65,11 +65,12 @@ function Clase() {
 
     const handleContratar = () => {
         const nuevaContratacion = {
-            
-            claseId: id
+            motivo:'',
+            estado:'pendiente',
+            claseId: id,
+            horarioReferencia: Date.now()
         };
-
-        hiringsService.createHiring(nuevaContratacion, {token});
+        hiringsService.createHiring(nuevaContratacion,{token});
         setContratado(true)
     }
 
