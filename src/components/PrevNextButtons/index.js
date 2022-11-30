@@ -2,19 +2,30 @@ import React, { useContext } from 'react'
 import {Box,Button} from '@mui/material'
 import UserContext from '../../context/UserContext'
 import classesService from '../../services/classes'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 
 function PrevNextButtons({page,setPage,claseData={}}) {
   const prevButtonVisible = page===0 ? 'none' : ''
   const {user}=useContext(UserContext)
   const navigate = useNavigate();
   const {token}=user
+  const {id} = useParams();
+  console.log('id',id)
+
   const handleClickNext = ()=>{
     if(page===3){
-      classesService.create(claseData,{token})
-      .then(returnedClass=>{
-        navigate('/')
-      })
+      if(id){
+        console.log('entro al servicio de edicion')
+        classesService.updateClass(claseData,id,{token})
+        .then(returnedClass=>{
+          navigate('/')})
+      }
+      else{
+        classesService.create(claseData,{token})
+        .then(returnedClass=>{
+          navigate('/')
+        })
+      }
     } else{
       setPage(page+1)
     }

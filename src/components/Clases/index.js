@@ -13,7 +13,7 @@ function Clases({categoryFilter, filters}) {
       setClasses(classes)
     })
   },[])
-  console.log(classes)
+  console.log('aca',classes)
   const classesToShow = classes.filter(clase=>clase.categoria==categoryFilter )
 
     

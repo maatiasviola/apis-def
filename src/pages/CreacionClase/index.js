@@ -11,9 +11,9 @@ function CreacionClase() {
   const [claseData,setClaseData]=useState({
     nombre:"",
     descripcion:"",
-    tipo:"",
+    tipo:"Cualquiera",
     categoria:"",
-    frecuencia:"",
+    frecuencia:"Cualquiera",
     duracion:"",
     costo:"",
     imagen:""

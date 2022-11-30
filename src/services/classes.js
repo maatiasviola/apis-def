@@ -23,14 +23,16 @@ const create = (newObject,{token})=>{
     return request.then(response=>console.log("RESPUESTA: ",response))
 }
 
-const updateClass = ({newObject,id,token})=>{
+const updateClass = (newObject,id,{token})=>{
     const config={
         headers:{
             authorization: token
         }
     }
+    console.log(newObject)
+    console.log(id)
     const request= axios.put(`${URL}/${id}`,newObject,config)
-    return request.then(response=>response)
+    return request.then(response=>console.log(response))
 }
 
 const removeClass = ({id,user_role,token}) => {
@@ -39,7 +41,7 @@ const removeClass = ({id,user_role,token}) => {
             authorization: token
         }
     }
-    const request= axios.delete(`${URL}/${id}`,{user_role},config)
+    const request= axios.delete(`${URL}/${id}`,{data:user_role},config)
     return request.then(response=>response)
 }
 

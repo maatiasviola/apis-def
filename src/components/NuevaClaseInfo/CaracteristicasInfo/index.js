@@ -7,8 +7,8 @@ import {tiposClase,frecuenciasClase} from '../../../data/scrollableDataOptions'
 import StyledFilterButton from '../../StyledFilterButton'
 
 function CaracteristicasInfo({page,setPage,claseData,setClaseData}) {
-    const [tipoClaseSelected,setTipoClaseSelected]=useState('Cualquiera')
-    const [frecuenciaSelected,setFrecuenciaSelected]=useState('Cualquiera')
+    const [tipoClaseSelected,setTipoClaseSelected]=useState(claseData.tipo)
+    const [frecuenciaSelected,setFrecuenciaSelected]=useState(claseData.frecuencia)
 
     const handleClickTipoClase = (event)=>{
       setTipoClaseSelected(event.target.value)

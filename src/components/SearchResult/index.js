@@ -28,7 +28,7 @@ function SearchResult({clase}) {
     <div className='searchResult'>
       <img src={clase.imagen} alt={clase.nombre}/>
       {user.rol === 'profesor' &&
-      <Link to={`/clases/creacion`}>
+      <Link to={`/clases/edicion/${clase.id}`}>
         <EditRoundedIcon color='black' className='searchResult__edit'/>
       </Link>
       }
