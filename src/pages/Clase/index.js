@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import { AiFillStar } from 'react-icons/ai';
 import { BsFillPersonLinesFill} from 'react-icons/bs';
 import classesService from '../../services/classes'
+import hiringsService from '../../services/hirings'
 import {clases} from '../../data/coursesData'
 import Button from '../../components/Button';
 import CardComentario from '../../components/CardComentario';
@@ -13,11 +14,14 @@ import FormComentarios from '../../components/FormComentarios';
 import UserContext from '../../context/UserContext'
 import userEvent from '@testing-library/user-event';
 import useClass from '../../hooks/useClass';
+import { FlareSharp } from '@mui/icons-material';
+
 
 
 function Clase() {
 
     const {user}=useContext(UserContext)
+    const {token}=user
 
     const [claseElegida,setClaseElegida]=useState({})
     console.log("CLASE ELEGIDA: ",claseElegida)
@@ -55,6 +59,18 @@ function Clase() {
   
     if((Object.keys(claseElegida).length===0)){
         return <h1>Cargando</h1>
+    }
+
+    const [contratado,setContratado]=useState(false)
+
+    const handleContratar = () => {
+        const nuevaContratacion = {
+            
+            claseId: id
+        };
+
+        hiringsService.createHiring(nuevaContratacion, {token});
+        setContratado(true)
     }
 
     return (
@@ -316,7 +332,7 @@ function Clase() {
                                 </Box>
                                 </Box>
                             </Box>
-                            <Button disabled={!user || user.rol=='profesor'}>
+                            <Button disabled={!user || user.rol=='profesor'} onClick={handleContratar}>
                                 Contratar
                             </Button>
                         </Box>

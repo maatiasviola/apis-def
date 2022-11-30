@@ -24,7 +24,7 @@ function SearchResult({clase}) {
     }
 
   return (
-    <LinkMUI component={Link} to={`/clase/${clase.id}`}>
+    <LinkMUI component={Link} to={`/clases/${clase.id}`}>
     <div className='searchResult'>
       <img src={clase.imagen} alt={clase.nombre}/>
       {user.rol === 'profesor' &&
