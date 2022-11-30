@@ -1,8 +1,13 @@
-import React, { useState }  from 'react'
+import React, { useState, useContext }  from 'react'
 import './styles.css'
 import {Box, Typography} from '@mui/material'
+import hiringsService from '../../services/hirings'
+import UserContext from '../../context/UserContext'
 
 function CardContratacion({contratacion}) {
+
+    const {user}=useContext(UserContext)
+    const {token}=user
     
     const claseContratada = contratacion.clase
 
@@ -10,7 +15,18 @@ function CardContratacion({contratacion}) {
 
     const [confirmado, setConfirmar] = useState(contratacion.estado == 'aceptada')
 
-    const handleConfirmar = () => {setConfirmar(!confirmado)};
+    const handleConfirmar = () => {
+        setConfirmar(true);
+        hiringsService.approveHiring(contratacion.id,{token})
+    };
+
+    const handleFinalizar = () => {
+        hiringsService.removeHiring(contratacion.id,{token})
+    }
+
+    const handleCancelar = () => {
+        hiringsService.removeHiring(contratacion.id,{token})
+    }
 
     return (
         <Box sx={{
@@ -50,15 +66,15 @@ function CardContratacion({contratacion}) {
                     </button>
                 </div>
                 :
-                <div className='continue-div' onClick={handleConfirmar}>
+                <div className='continue-div' onClick={handleFinalizar}>
                     <button className='continue-button confirmar'>
                         <span className='continue-span'> Finalizar </span>
                     </button>
                 </div>
                 }
-                <div className='continue-div'>
+                <div className='continue-div' onClick={handleCancelar}>
                     <button className='continue-button cancelar'>
-                        <span className='continue-span' >Cancelar</span>
+                        <span className='continue-span'>Cancelar</span>
                     </button>
                 </div>
             </div>
