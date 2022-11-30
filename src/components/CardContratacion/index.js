@@ -1,14 +1,16 @@
 import React, { useState }  from 'react'
 import './styles.css'
-import {clases,usuarios} from '../../data/coursesData'
 import {Box, Typography} from '@mui/material'
 
 function CardContratacion({contratacion}) {
-    const claseContratada = clases.find(clase=>clase.idClase===contratacion.idClase)
+    
+    const claseContratada = contratacion.clase
     console.log('claseContratada: ',claseContratada)
-    const usuarioElegido = usuarios.find(usuario=>usuario.email===contratacion.email)
 
-    const [confirmado, setConfirmar] = useState(true)
+    const usuarioElegido = contratacion.usuario
+    console.log('usuario: ',usuarioElegido)
+
+    const [confirmado, setConfirmar] = useState(contratacion.estado == 'aceptada')
 
     const handleConfirmar = () => {setConfirmar(!confirmado)};
 
@@ -27,15 +29,15 @@ function CardContratacion({contratacion}) {
                     width:'100%',
                     borderRadius:3
                 }}
-                src={claseContratada.srcImagen} alt={claseContratada.nombre}/>
+                src={claseContratada.imagen} alt={claseContratada.nombre}/>
         <Box className='cardSub'>
-            <h4>Motivo: {contratacion.motivoInteres}</h4>
+            <h4>Motivo: {contratacion.motivo}</h4>
            
             <Typography component='p' sx={{color: '#4d4d4d'}}>{usuarioElegido.email}</Typography>
-            <p className='infoText'>Tel: {usuarioElegido.nroTelefono}</p>
+            <p className='infoText'>Tel: {usuarioElegido.telefono}</p>
             <div className='profile'>
                 <div className='profilePhotoContainer'>
-                    <img src={usuarioElegido.srcImagen} alt={usuarioElegido.nombre}
+                    <img src={usuarioElegido.avatar} alt={usuarioElegido.nombre}
                     className='profilePhoto' />
                 </div>
                 <div>

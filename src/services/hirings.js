@@ -32,4 +32,9 @@ const removeHiring = ({id,token}) => {
     return request.then(response=>response)
 }
 
-export default {createHiring, approveHiring, removeHiring}
+const getHiringByUserTeacher = (id) => {
+    const request = axios.get(`${URL}/${id}`)
+    return request.then(response=>response.data.data)
+}
+
+export default {createHiring, approveHiring,removeHiring,getHiringByUserTeacher}

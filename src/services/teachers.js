@@ -1,7 +1,7 @@
 import axios from 'axios'
 const URL = 'http://localhost:4000/teachers'
 
-const createStudent = (newObject,{token}) =>{
+const createTeacher = (newObject,{token}) =>{
     const config ={
         headers:{
             authorization: token
@@ -12,4 +12,9 @@ const createStudent = (newObject,{token}) =>{
     return request.then(response=>response)
 }
 
-export default {createStudent}
+const getTeacherById = (id) =>{
+    const request= axios.get(`${URL}/${id}`)
+    return request.then(response=>response.data.data)
+}
+
+export default {createTeacher,getTeacherById}
