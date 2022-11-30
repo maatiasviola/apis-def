@@ -9,17 +9,18 @@ function Contrataciones() {
     const [contratacionesToShow,setContrataciones]=useState([])
 
     useEffect(()=>{
-      hiringsService.getHiringByUserTeacher(user.id)
+      hiringsService.getHiringsById(user.id)
       .then(hirings=>{
-        console.log(hirings)
-        setContrataciones(hirings.contrataciones)
+        setContrataciones(hirings)
       })
     },[])
 
     return (
     <Box sx={{m:2}}>
         <Grid container rowSpacing={3} columnSpacing={3}>
+        {console.log('contrataciones:',contratacionesToShow)}
         {
+            
             contratacionesToShow.map(contratacion=>{
                 return(
                           <Grid key={contratacion.id} item xs={12} sm={4} md={4} lg={3}>

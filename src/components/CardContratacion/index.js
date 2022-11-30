@@ -5,10 +5,8 @@ import {Box, Typography} from '@mui/material'
 function CardContratacion({contratacion}) {
     
     const claseContratada = contratacion.clase
-    console.log('claseContratada: ',claseContratada)
 
     const usuarioElegido = contratacion.usuario
-    console.log('usuario: ',usuarioElegido)
 
     const [confirmado, setConfirmar] = useState(contratacion.estado == 'aceptada')
 
@@ -34,7 +32,7 @@ function CardContratacion({contratacion}) {
             <h4>Motivo: {contratacion.motivo}</h4>
            
             <Typography component='p' sx={{color: '#4d4d4d'}}>{usuarioElegido.email}</Typography>
-            <p className='infoText'>Tel: {usuarioElegido.telefono}</p>
+            <p className='infoText'>Tel: {usuarioElegido.telofono}</p>
             <div className='profile'>
                 <div className='profilePhotoContainer'>
                     <img src={usuarioElegido.avatar} alt={usuarioElegido.nombre}
