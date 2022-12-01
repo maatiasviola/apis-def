@@ -67,7 +67,9 @@ function SignUp() {
       const new_teacher = {...nuevoProfesor, user_identifier: response.id}
       const teacher_created = teachersService.createTeacher(new_teacher);
       console.log(teacher_created)
-    }}
+    }
+    handleSignUp()
+  }
   );
 }
 
