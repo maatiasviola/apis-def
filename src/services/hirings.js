@@ -9,7 +9,7 @@ const createHiring = (newObject,{token}) => {
     }
     console.log("CONTRATACION QUE LLEGA AL SERVICIO: ",newObject)
     const request= axios.post(URL,newObject,config)
-    return request.then(response=>response.data.data)
+    return request.then(response=>console.log(response))
 }
 
 const approveHiring = (id,{token}) => {
@@ -33,8 +33,14 @@ const removeHiring = (id,{token}) => {
 }
 
 const getHiringsById = (id) => {
+    /*Convierte el id de usuario al id del profesor y busca las contrataciones para las clases de ese profesor*/
     const request = axios.get(`${URL}/${id}`)
     return request.then(response=>response.data.data)
 }
 
-export default {createHiring, approveHiring,removeHiring,getHiringsById}
+const getHiringUsuarioClase = (claseId,usuarioId) => {
+    const request = axios.get(`${URL}/${usuarioId}/${claseId}`)
+    return request.then(response=>response.data.data)
+}
+
+export default {createHiring, approveHiring,removeHiring,getHiringsById,getHiringUsuarioClase}

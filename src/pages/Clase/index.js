@@ -16,12 +16,9 @@ import userEvent from '@testing-library/user-event';
 import useClass from '../../hooks/useClass';
 import { FlareSharp } from '@mui/icons-material';
 
-
-
 function Clase() {
 
     const {user}=useContext(UserContext)
-    const {token}=user
 
     const [claseElegida,setClaseElegida]=useState({})
     console.log("CLASE ELEGIDA: ",claseElegida)
@@ -39,9 +36,25 @@ function Clase() {
             claseElegida.tipo || 'grupal',
             'Superclase'
         ]
-    
 
-    console.log(claseElegida)
+    const [yaContratado,setContratado]=useState(false)
+    
+    if(user){
+        hiringsService.getHiringUsuarioClase(id,user.id).then(hiring => setContratado(hiring.length > 0))
+    }
+
+    const handleContratar = () => {
+        if(!(!user || user.rol=='profesor' || yaContratado)){
+        const nuevaContratacion = {
+            motivo:'',
+            claseId: id,
+            horarioReferencia: new Date()
+        };
+        const {token}=user
+        hiringsService.createHiring(nuevaContratacion,{token});
+        setContratado(true)
+        }
+    }
 
     let calificacionGeneral = 0
 
@@ -59,19 +72,6 @@ function Clase() {
   
     if((Object.keys(claseElegida).length===0)){
         return <h1>Cargando</h1>
-    }
-
-    const [contratado,setContratado]=useState(false)
-
-    const handleContratar = () => {
-        const nuevaContratacion = {
-            motivo:'',
-            estado:'pendiente',
-            claseId: id,
-            horarioReferencia: Date.now()
-        };
-        hiringsService.createHiring(nuevaContratacion,{token});
-        setContratado(true)
     }
 
     return (
@@ -333,7 +333,7 @@ function Clase() {
                                 </Box>
                                 </Box>
                             </Box>
-                            <Button disabled={!user || user.rol=='profesor'} onClick={handleContratar}>
+                            <Button disabled={!user || user.rol=='profesor' || yaContratado} onClick={handleContratar}>
                                 Contratar
                             </Button>
                         </Box>

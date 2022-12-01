@@ -6,7 +6,6 @@ import Clases from '../../components/Clases'
 import Header from '../../components/Header'
 
 function Home() {
-
     const [categoryFilter,setCategoryFilter]=useState(0)
     const [filtersModal,showFiltersModal]=useState(false)
     const [filters,setFilters]=useState({

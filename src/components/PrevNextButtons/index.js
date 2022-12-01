@@ -7,8 +7,8 @@ import { useNavigate, useParams} from 'react-router-dom';
 function PrevNextButtons({page,setPage,claseData={}}) {
   const prevButtonVisible = page===0 ? 'none' : ''
   const {user}=useContext(UserContext)
-  const navigate = useNavigate();
   const {token}=user
+  const navigate = useNavigate();
   const {id} = useParams();
   console.log('id',id)
 
