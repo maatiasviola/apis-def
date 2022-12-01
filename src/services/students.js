@@ -7,9 +7,8 @@ const createStudent = (newObject,{token}) =>{
             authorization: token
         }
     }
-    console.log("ESTUDIANTE QUE LLEGA AL SERVICIO: ",newObject)
     const request= axios.post(URL,newObject,config)
-    return request.then(response=>response)
+    return request.then(response=>response.data)
 }
 
 export default {createStudent}
