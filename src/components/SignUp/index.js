@@ -18,16 +18,22 @@ import {roles,estudios,preguntasVerificacion} from '../../data/scrollableDataOpt
 import useSignUpModal from '../../hooks/useSignUpModal';
 import UserContext from '../../context/UserContext';
 
+//services
+import usersService from '../../services/users'
+import teachersService from '../../services/teachers'
+import studentsService from '../../services/students'
+
 function SignUp() {
   const [nuevoUsuario,setNuevoUsuario]=useState({
-    rol:'alumno',
     nombre:'',
     apellido:'',
+    avatar: 'https://img2.freepng.es/20190702/tl/kisspng-computer-icons-portable-network-graphics-avatar-tr-clip-directory-professional-transparent-amp-png-5d1bfa95e508d4.2980489715621147099381.jpg',
+    telofono:'',
     email:'',
-    nroTelefono:'',
     password:'',
     preguntaVerificacion:'',
-    respuestaVerificacion:''
+    respuestaVerificacion:'',
+    rol:'alumno'
   })
 
   const [nuevoProfesor,setNuevoProfesor]=useState({
@@ -37,8 +43,8 @@ function SignUp() {
 
   const [nuevoEstudiante,setNuevoEstudiante]=useState({
     fechaNacimiento:'',
-    estudiosTerminados:'',
-    estudiosEnCurso:''
+    mayorEstudioCursado:'',
+    mayorEstudioFinalizado:''
   })
     
   //manipular modales
@@ -49,32 +55,23 @@ function SignUp() {
 
   //creacion nuevo usuario
   const handleSubmit=(event)=>{
-      event.preventDefault()
-      console.log('Submit')
-        
-      {/*Guardar usuario en bdd */}
+    event.preventDefault()
+    console.log('Submit')
 
-      if(nuevoUsuario.rol === 'alumno'){
-
-        const alumnoAGuardar = {
-          //idUsuario:id,
-          ...nuevoEstudiante
-        }
-
-        {/*Falta algo aca, guardar en bdd */}
-        
-      }else{
-
-        const profesorAGuardar = {
-          //idUsuario:id,
-          ...nuevoProfesor
-        }
-
-        {/*Falta algo aca, guardar en bdd */}
-      }
-      
-      //setAllUsers(allUsers.concat(nuevoUsuario))
+    const user_created = usersService.createUser(nuevoUsuario).then(response=>
+    {if(nuevoUsuario.rol === 'alumno') {
+      const new_student = {...nuevoEstudiante, user_identifier: response.id}
+      const student_created = studentsService.createStudent(new_student);
+      console.log(student_created)
+    } else {
+      const new_teacher = {...nuevoProfesor, user_identifier: response.id}
+      const teacher_created = teachersService.createTeacher(new_teacher);
+      console.log(teacher_created)
+    }
+    handleSignUp()
   }
+  );
+}
 
     return (
     <>
@@ -196,6 +193,14 @@ function SignUp() {
               </Select>
             </FormControl>
 
+            <TextField 
+              sx={{mb:1}} 
+              fullWidth 
+              multiline 
+              label="Respuesta" 
+              value={nuevoUsuario.respuestaVerificacion} 
+              onChange={(e)=>setNuevoUsuario({...nuevoUsuario,respuestaVerificacion:e.target.value})}
+            />
 
             <Box sx={{
                 width: '100%',
@@ -228,14 +233,7 @@ function SignUp() {
               </Select>
             </FormControl>
 
-            <TextField 
-              sx={{mb:1}} 
-              fullWidth 
-              multiline 
-              label="Respuesta" 
-              value={nuevoUsuario.respuestaVerificacion} 
-              onChange={(e)=>setNuevoUsuario({...nuevoUsuario,respuestaVerificacion:e.target.value})}
-            />
+
 
             {
               nuevoUsuario.rol==='profesor' ? (
@@ -275,7 +273,7 @@ function SignUp() {
                         sx={{mb:2}}
                         value={nuevoEstudiante.estudiosTerminados}
                         label='Estudios mas altos terminados'
-                        onChange={(e)=>setNuevoEstudiante({...nuevoEstudiante,estudiosTerminados:e.target.value})}
+                        onChange={(e)=>setNuevoEstudiante({...nuevoEstudiante,mayorEstudioFinalizado:e.target.value})}
                       >
                         {
                           estudios.map(estudio=>{
@@ -293,7 +291,7 @@ function SignUp() {
                     <InputLabel>Estudios mas altos en curso</InputLabel>
                       <Select
                         value={nuevoEstudiante.estudiosEnCurso}
-                        onChange={(e)=>setNuevoEstudiante({...nuevoEstudiante,estudiosEnCurso:e.target.value})}
+                        onChange={(e)=>setNuevoEstudiante({...nuevoEstudiante,mayorEstudioCursado:e.target.value})}
                         label='Estudios mas altos en curso'
                         fullWidth
                         sx={{mb:2}}

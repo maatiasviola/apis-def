@@ -7,9 +7,8 @@ const getUser =  ({id}) =>{
 }
 
 const createUser = (newObject) => {
-    console.log("USUARIO QUE LLEGA AL SERVICIO: ",newObject)
     const request= axios.post(URL,newObject)
-    return request.then(response=>response)
+    return request.then(response=>response.data.createdUser)
 }
 
 export default {getUser,createUser}

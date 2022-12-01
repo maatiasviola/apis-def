@@ -1,15 +1,9 @@
 import axios from 'axios'
 const URL = 'http://localhost:4000/teachers'
 
-const createTeacher = (newObject,{token}) =>{
-    const config ={
-        headers:{
-            authorization: token
-        }
-    }
-    console.log("PROFESOR QUE LLEGA AL SERVICIO: ",newObject)
-    const request= axios.post(URL,newObject,config)
-    return request.then(response=>response)
+const createTeacher = (newObject) =>{
+    const request= axios.post(URL,newObject)
+    return request.then(response=>response.data)
 }
 
 const getTeacherById = (id) =>{
