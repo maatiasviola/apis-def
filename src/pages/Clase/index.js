@@ -25,6 +25,7 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import Rating from '@mui/material/Rating';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -110,8 +111,14 @@ function Clase() {
                 })
             calificacionGeneral=result.calificacion
         }
-    }
-  
+    }  
+
+    {claseElegida && user && console.log(claseElegida.calificaciones.some(calificacion => calificacion.usuario == user.id))}
+
+    const [ratingUsuario, setRating] = useState(calificacionGeneral);
+
+    const [ratingHabilitado, setHabilitado] = useState(true)
+
     if((Object.keys(claseElegida).length===0)){
         return <h1>Cargando</h1>
     }
@@ -305,6 +312,25 @@ function Clase() {
                             mt:'2rem'
                             }} 
                         >
+                            <h3>
+                                Calificación de la Clase:
+                            </h3>
+                            <h3>
+                                {calificacionGeneral}
+                            </h3>
+                            {user &&
+                            <div>
+                                <h3> Valora la clase! </h3>
+                                <Rating 
+                                    name="Valoración del usuario"
+                                    value={ratingUsuario}
+                                    onChange={(event, newValue) => {setRating(newValue); setHabilitado(false);}}
+                                    readOnly={!ratingHabilitado}
+                                    sx={{
+                                        marginBottom: '40px'
+                                }}/>
+                            </div>
+                            }
                             <Box sx={{display:'flex'}}>
                                 <Box sx={{
                                     display: 'flex',
@@ -397,8 +423,6 @@ function Clase() {
                                     renderInput={(params) => <TextField {...params} />}
                                     />
                                     </LocalizationProvider>
-
-
                                     <DialogContentText sx={{ marginTop:'10px' }}>
                                         Motivo por el cual esta interesado en la clase
                                     </DialogContentText>
