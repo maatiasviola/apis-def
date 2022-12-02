@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import './styles.css';
 import StarIcon from '@mui/icons-material/Star';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
@@ -15,22 +15,14 @@ function SearchResult({clase,classes,setClasses}) {
   const {token} = user
   console.log(user)
 
-  let calificacionGeneral = 0
-
-    if(clase.calificaciones.length!==0){
-        const {calificaciones} = clase
-        const result = calificaciones.reduce(function(acumulador,siguienteValor){
-            return{
-                calificacion : acumulador.calificacion + siguienteValor.calificacion
-            }
-            })
-        calificacionGeneral=result.calificacion
-    }
+  const [calificacionGeneral, setCalificacionGeneral] = useState(0);
   
   const handleFinalizar = () =>{
-        hiringsService.getHiringUsuarioClase(clase.id,user.id).then(/*contratacion => hiringsService.removeHiring(contratacion.id,{token})*/)
-        /*classesService.unrollStudent(contratacion.clase.id,contratacion.usuario.id,{token})*/
-        setClasses(classes.filter(elemento => elemento !== clase))
+    /*
+        hiringsService.getHiringUsuarioClase(clase.id,user.id).then(/*contratacion => hiringsService.removeHiring(contratacion.id,{token}))
+        classesService.unrollStudent(contratacion.clase.id,contratacion.usuario.id,{token})
+        setClasses(classes.filter(elemento => elemento !== clase)) 
+    */
     }
 
   return (
@@ -66,20 +58,39 @@ function SearchResult({clase,classes,setClasses}) {
         </div>
       </div>
       </LinkMUI>
-      <MUIButton sx={{
-            textAlign: 'right',
-            fontSize: '1rem',
-            lineHeight: '1.25rem',
-            fontWeight: 600,
-            borderRadius: 2, 
-            p:2,
-            background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
-            color: 'rgb(255, 255, 255)',
-            width: '20%'
-          }}
-          onClick={handleFinalizar}>
+      {user.rol === 'alumno' &&
+        <MUIButton sx={{
+          textAlign: 'right',
+          fontSize: '1rem',
+          lineHeight: '1.25rem',
+          fontWeight: 600,
+          borderRadius: 2, 
+          p:2,
+          background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
+          color: 'rgb(255, 255, 255)',
+          width: '20%'
+        }}
+        onClick={handleFinalizar}>
         Finalizar clase
       </MUIButton>
+      }
+      {user.rol === 'profesor' &&
+      <MUIButton sx={{
+          textAlign: 'right',
+          fontSize: '1rem',
+          lineHeight: '1.25rem',
+          fontWeight: 600,
+          borderRadius: 2, 
+          p:2,
+          background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
+          color: 'rgb(255, 255, 255)',
+          width: '20%'
+        }}
+        onClick={handleFinalizar}>
+        Eliminar clase
+      </MUIButton>
+
+      }
     </div>
   )
 }
