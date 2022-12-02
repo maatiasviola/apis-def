@@ -38,7 +38,6 @@ function Clase() {
 
     const [claseElegida,setClaseElegida]=useState({})
     console.log("CLASE ELEGIDA: ",claseElegida)
-    console.log('chequeo',claseElegida.length > 0)
     const {id} = useParams();
     
     useEffect(()=>{
@@ -46,6 +45,8 @@ function Clase() {
             .then(clase=>{
                 setClaseElegida(clase)
             })
+        console.log(claseElegida.length() > 0)
+        console.log('chequeo',claseElegida.length > 0)
     },[])
     
     const caracteristicasClase=[
@@ -103,7 +104,7 @@ function Clase() {
 
     const [calificacionGeneral, setCalificacionGeneral] = useState(0);
     
-    if(claseElegida.length > 0){
+    if(claseElegida.length() > 0){
         setCalificacionGeneral(claseElegida.calificacionPromedio.promedioCalculado)
     }
     
