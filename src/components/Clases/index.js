@@ -14,8 +14,9 @@ function Clases({categoryFilter, filters}) {
     })
   },[])
   console.log('aca',classes)
+  console.log(filters.calificacion2)
   const classesToShow = classes.filter(clase=> (clase.categoria==categoryFilter 
-    && (clase.calificacionPromedio.promedioCalculado > filters.calificacion1 && clase.calificacionPromedio.promedioCalculado <= filters.calificacion2) ) )
+    && (clase.calificacionPromedio.promedioCalculado >= filters.calificacion1 && clase.calificacionPromedio.promedioCalculado < filters.calificacion2) ) )
 
     
   return (
