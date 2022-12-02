@@ -16,4 +16,14 @@ const createUser = (newObject) => {
     return request.then(response=>response.data.createdUser)
 }
 
-export default {getUser,createUser,getUserByEmail}
+const checkVerificationAnswer = (newObject) => {
+    const request= axios.post(`${URL}/checkAnswer`,newObject)
+    return request.then(response=>response.data)
+}
+
+const updatePassword = (newObject)=>{
+    const request= axios.put(`${URL}/updatePassword`,newObject)
+    return request.then(response=>response.data)
+}
+
+export default {getUser, createUser, getUserByEmail, checkVerificationAnswer, updatePassword}
