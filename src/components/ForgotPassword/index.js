@@ -6,8 +6,11 @@ import {MdClose} from 'react-icons/md';
 import ForgotPasswordContext from '../../context/ForgotPasswordContext';
 import { usuarios } from '../../data/coursesData';
 import UserContext from '../../context/UserContext';
+import usersService from '../../services/users'
 
 function ForgotPassword() {
+    const {user} = useContext(UserContext)
+
     const { showForgotPassword, handleForgotPassword } = useForgotPasswordModal()
     const {setShowForgotPassword} = useContext(ForgotPasswordContext)
 
@@ -23,7 +26,7 @@ function ForgotPassword() {
     }
 
     const handleSubmitEmail = ()=>{
-        const buscarUsuario= usuarios.find(usuario=>usuario.email=email)
+        const buscarUsuario= usersService.getUserByEmail(email).then(response => console.log(response))
         console.log(buscarUsuario)
         if(buscarUsuario){
             setUsuario(buscarUsuario)
