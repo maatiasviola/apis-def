@@ -26,7 +26,7 @@ function ForgotPassword() {
     }
 
     const handleSubmitEmail = ()=>{
-        const buscarUsuario= usersService.getUserByEmail(email).then(response => console.log(response))
+        const buscarUsuario= usersService.getUserByEmail({email: email}).then(response => console.log(response))
         console.log(buscarUsuario)
         if(buscarUsuario){
             setUsuario(buscarUsuario)
