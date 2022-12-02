@@ -101,10 +101,10 @@ function Clase() {
         }
     }
 
-    let calificacionGeneral = 0
+    const [calificacionGeneral, setCalificacionGeneral] = useState(0);
     
     if(claseElegida.length > 0){
-        calificacionGeneral = claseElegida.calificacionPromedio.promedioCalculado
+        setCalificacionGeneral(claseElegida.calificacionPromedio.promedioCalculado)
     }
     
     const [ratingUsuario, setRating] = useState(0);
