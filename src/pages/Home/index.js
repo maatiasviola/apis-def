@@ -15,6 +15,8 @@ function Home() {
       calificacion2:5
     })
 
+    console.log(filters)
+    
     const handleCloseFilterModal =()=>{
       showFiltersModal(false)
     }
