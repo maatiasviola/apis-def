@@ -13,7 +13,7 @@ function Comentarios({comentarios}) {
   useEffect(()=>{
     if(user && comentarios.length>0){
       classesService.getOneClass({id:comentarios[0].clase})
-      .then(clase => setClasePropia('coment:',clase.profesor.usuario.id === user.id))
+      .then(clase => setClasePropia(clase.profesor.usuario.id === user.id))
     }
   },[])
 

@@ -1,21 +1,16 @@
 import React,{useEffect,useState, useContext} from 'react'
 import dayjs from 'dayjs';
-import {Container,CssBaseline,Box,Dialog,IconButton,Typography, List, ListItem } from '@mui/material'
-import {Link,useParams} from 'react-router-dom';
+import {Container,CssBaseline,Box,Dialog,Typography} from '@mui/material'
+import {useParams} from 'react-router-dom';
 import Header from '../../components/Header';
 import { AiFillStar } from 'react-icons/ai';
 import { BsFillPersonLinesFill} from 'react-icons/bs';
 import classesService from '../../services/classes'
 import hiringsService from '../../services/hirings'
 import qualificationsService from '../../services/qualifications'
-import {clases} from '../../data/coursesData'
 import Button from '../../components/Button';
-import CardComentario from '../../components/CardComentario';
 import Comentarios from '../../components/Comentarios';
 import FormComentarios from '../../components/FormComentarios';
-import userEvent from '@testing-library/user-event';
-import useClass from '../../hooks/useClass';
-import { FlareSharp } from '@mui/icons-material';
 import UserContext from '../../context/UserContext';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -39,14 +34,12 @@ function Clase() {
     const [claseElegida,setClaseElegida]=useState({})
     console.log("CLASE ELEGIDA: ",claseElegida)
     const {id} = useParams();
-    
+
     useEffect(()=>{
         classesService.getOneClass({id})
             .then(clase=>{
                 setClaseElegida(clase)
             })
-        console.log(claseElegida.length() > 0)
-        console.log('chequeo',claseElegida.length > 0)
     },[])
     
     const caracteristicasClase=[
@@ -79,13 +72,8 @@ function Clase() {
     };
 
     const [valueTiempo, setValueTiempo] = useState(dayjs('2018-01-01T00:00:00.000Z'));
-    console.log('tiempo',valueTiempo.hour().toString() + ':' + valueTiempo.minute().toString())
 
     const [yaContratado,setContratado]=useState(false)
-    
-    if(user){
-        hiringsService.getHiringUsuarioClase(id,user.id).then(hiring => setContratado(hiring.length > 0))
-    }
 
     const handleContratar = () => {
         if(!(!user || user.rol=='profesor' || yaContratado)){
@@ -104,25 +92,32 @@ function Clase() {
 
     const [calificacionGeneral, setCalificacionGeneral] = useState(0);
     
-    if(claseElegida.length() > 0){
-        setCalificacionGeneral(claseElegida.calificacionPromedio.promedioCalculado)
-    }
-    
+    useEffect(()=>{
+        if(Object.keys(claseElegida).length !==0 ){
+            setCalificacionGeneral(claseElegida.calificacionPromedio.promedioCalculado)
+        }
+        if(user){
+            hiringsService.getHiringUsuarioClase(id,user.id).then(hiring => setContratado(hiring.length > 0))
+        }
+    },[claseElegida])
+
     const [ratingUsuario, setRating] = useState(0);
 
     const [ratingHabilitado, setHabilitado] = useState(true)
 
-    if(claseElegida.length > 0 && user){console.log('condicion',claseElegida.estudiantes.some(estudiante => estudiante == user.id))}
 
-    if (claseElegida.length > 0 && user){
-        const calificacionExistente = claseElegida.calificaciones.find(calificacion => calificacion.usuario == user.id)
-        if(!calificacionExistente){
-            setHabilitado(true)
+    useEffect(()=>{
+        if(Object.keys(claseElegida).length !==0 && user){console.log('condicion',claseElegida.estudiantes.some(estudiante => estudiante == user.id))}
+        if (Object.keys(claseElegida).length !==0 && user){
+            const calificacionExistente = claseElegida.calificaciones.find(calificacion => calificacion.usuario == user.id)
+            if(!calificacionExistente){
+                setHabilitado(true)
+            }
+            else{
+                setRating(calificacionExistente.valor)
+            }
         }
-        else{
-            setRating(calificacionExistente.valor)
-        }
-    }
+    },[claseElegida])
 
     const handleNewRating = (newValue) =>{
         setRating(newValue)
@@ -335,7 +330,7 @@ function Clase() {
                             <h3>
                                 {calificacionGeneral}
                             </h3>
-                            {//claseElegida.length > 0 && user && claseElegida.estudiantes.some(estudiante => estudiante == user.id)
+                            {Object.keys(claseElegida).length !==0  && user && claseElegida.estudiantes.some(estudiante => estudiante == user.id) &&
                             <div>
                                 <h3> Valora la clase! </h3>
                                 <Rating 
