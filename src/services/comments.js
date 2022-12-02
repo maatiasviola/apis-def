@@ -1,6 +1,6 @@
 import axios from 'axios'
 const URL = 'http://localhost:4000/comments'
-
+const URL2 = 'http://localhost:4000/emails'
 
 const createComment = (newObject,{token}) =>{
     const config ={
@@ -33,4 +33,9 @@ const removeComment = (id,{token}) => {
     return request.then(response=>response)
 }
 
-export default {createComment,blockComment,removeComment}
+const notificarAlumno = (newObject) => {
+    const request= axios.post(`${URL2}`,newObject)
+    return request.then(response=>response.data)
+}
+
+export default {createComment,blockComment,removeComment, notificarAlumno}
