@@ -20,6 +20,7 @@ function CardComentario({comentario,clasePropia}) {
     //Si el comentario esta bloqueado hacer un display none
 
     const {user} = useContext(UserContext)
+    
 
     const [usuarioComentario,setUsuarioComentario]=useState({})
 
@@ -31,7 +32,8 @@ function CardComentario({comentario,clasePropia}) {
       },[])
     
     const handleBlockearComentario=()=>{
-        // commentsService.removeComment(comentario.id,{token})
+        const {token} = user
+        commentsService.removeComment({id: comentario.id}, {token})
         const newObject = {
             destinatario: usuarioComentario.email,
             motivo: valueInteres

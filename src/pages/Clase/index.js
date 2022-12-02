@@ -7,6 +7,7 @@ import { AiFillStar } from 'react-icons/ai';
 import { BsFillPersonLinesFill} from 'react-icons/bs';
 import classesService from '../../services/classes'
 import hiringsService from '../../services/hirings'
+import qualificationsService from '../../services/qualifications'
 import {clases} from '../../data/coursesData'
 import Button from '../../components/Button';
 import CardComentario from '../../components/CardComentario';
@@ -37,6 +38,7 @@ function Clase() {
 
     const [claseElegida,setClaseElegida]=useState({})
     console.log("CLASE ELEGIDA: ",claseElegida)
+    console.log('chequeo',claseElegida.length > 0)
     const {id} = useParams();
     
     useEffect(()=>{
@@ -100,24 +102,38 @@ function Clase() {
     }
 
     let calificacionGeneral = 0
-
-    if(!(Object.keys(claseElegida).length===0)){
-        if(claseElegida.calificaciones.length!==0){
-            const {calificaciones} = claseElegida
-            const result = calificaciones.reduce(function(acumulador,siguienteValor){
-                return{
-                    calificacion : acumulador.calificacion + siguienteValor.calificacion
-                }
-                })
-            calificacionGeneral=result.calificacion
-        }
-    }  
-
-    {claseElegida && user && console.log(claseElegida.calificaciones.some(calificacion => calificacion.usuario == user.id))}
-
-    const [ratingUsuario, setRating] = useState(calificacionGeneral);
+    
+    if(claseElegida.length > 0){
+        calificacionGeneral = claseElegida.calificacionPromedio.promedioCalculado
+    }
+    
+    const [ratingUsuario, setRating] = useState(0);
 
     const [ratingHabilitado, setHabilitado] = useState(true)
+
+    if(claseElegida.length > 0 && user){console.log('condicion',claseElegida.estudiantes.some(estudiante => estudiante == user.id))}
+
+    if (claseElegida.length > 0 && user){
+        const calificacionExistente = claseElegida.calificaciones.find(calificacion => calificacion.usuario == user.id)
+        if(!calificacionExistente){
+            setHabilitado(true)
+        }
+        else{
+            setRating(calificacionExistente.valor)
+        }
+    }
+
+    const handleNewRating = (newValue) =>{
+        setRating(newValue)
+        setHabilitado(false)
+        const {token}=user
+        const newObject = {
+            claseId: claseElegida.id,
+            userId: user.id,
+            valor: ratingUsuario
+        }
+        qualificationsService.createQualification(newObject,{token})
+    }
 
     if((Object.keys(claseElegida).length===0)){
         return <h1>Cargando</h1>
@@ -318,13 +334,13 @@ function Clase() {
                             <h3>
                                 {calificacionGeneral}
                             </h3>
-                            {user &&
+                            {//claseElegida.length > 0 && user && claseElegida.estudiantes.some(estudiante => estudiante == user.id)
                             <div>
                                 <h3> Valora la clase! </h3>
                                 <Rating 
                                     name="Valoración del usuario"
                                     value={ratingUsuario}
-                                    onChange={(event, newValue) => {setRating(newValue); setHabilitado(false);}}
+                                    onChange={(event, newValue) => {handleNewRating(newValue)}}
                                     readOnly={!ratingHabilitado}
                                     sx={{
                                         marginBottom: '40px'
