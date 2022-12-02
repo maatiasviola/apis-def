@@ -37,6 +37,7 @@ function CardComentario({comentario,clasePropia}) {
             motivo: valueInteres
         }
         commentsService.notificarAlumno(newObject)
+        handleClose()
     }
 
     const [open, setOpen] = React.useState(false);
