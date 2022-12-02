@@ -31,9 +31,13 @@ function CardComentario({comentario,clasePropia}) {
       },[])
     
     const handleBlockearComentario=()=>{
-        /*ENVIAR MAIL*/
-        const {token} = user
-        commentsService.removeComment(comentario.id,{token})
+        // commentsService.removeComment(comentario.id,{token})
+        const newObject = {
+            destinatario: usuarioComentario.email,
+            motivo: valueInteres
+        }
+        commentsService.notificarAlumno(newObject)
+        handleClose()
     }
 
     const [open, setOpen] = React.useState(false);

@@ -26,12 +26,13 @@ function ForgotPassword() {
     }
 
     const handleSubmitEmail = ()=>{
-        const buscarUsuario= usersService.getUserByEmail({email: email}).then(response => console.log(response))
-        console.log(buscarUsuario)
-        if(buscarUsuario){
-            setUsuario(buscarUsuario)
-            setPreguntaVerificacion(buscarUsuario.preguntaVerificacion)
-        }
+        const buscarUsuario= usersService.getUserByEmail({email: email}).then(response => 
+        {if(response){
+            setUsuario(response.data)
+            setPreguntaVerificacion(response.data.preguntaVerificacion)
+            console.log(response.data)
+        }}
+        )
     }
 
     const handleChangeRespuestaVerificacion = (event)=>{
@@ -39,11 +40,17 @@ function ForgotPassword() {
     }
     
     const handleSubmitPregunta = ()=>{
-        const respuestaValida= usuarios.find(usuario=>usuario.respuestaVerificacion=respuestaVerificacion)
-        
-        if(respuestaValida){
-            setRespuestaValida(true)
+        const newObject = {
+            email: email,
+            respuestaVerificacion: respuestaVerificacion
         }
+        console.log("Hola")
+        const respuestaValida= usersService.checkVerificationAnswer(newObject).then(response => 
+        {if(response.data.condition == true){
+            console.log("Lo lograste rey")
+            setRespuestaValida(true)
+        }}
+        )
     }
 
     const handleChangeNewPassword=(event)=>{
@@ -53,16 +60,11 @@ function ForgotPassword() {
     const {allUsers,setAllUsers} = useContext(UserContext)
 
     const handleSubmitNewPassword = ()=>{
-        const userToModify = allUsers.find(user=>user.email===email)
-
-        const userModified = {
-            ...userToModify,
-            password:newPassword
+        const newObject = {
+            email: email,
+            new_password: newPassword
         }
-        console.log(userModified)
-
-        setAllUsers(...allUsers,userModified)
-        console.log(allUsers)
+        const updated_password = usersService.updatePassword(newObject).then(console.log("Contraseña cambiada"))
     }
 
     return (
