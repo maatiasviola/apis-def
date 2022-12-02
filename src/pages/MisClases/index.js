@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 import usersService from '../../services/users'
 import CreateButton from '../../components/CreateButton'
 
+
+
 function MyClases() {
     const {user} = useContext(UserContext)
     const [classes,setClasses]=useState([])
@@ -53,7 +55,7 @@ function MyClases() {
                 </div>
                     
                     {classes.length !==0 ?                     
-                        classes.map(clase=><SearchResult key={clase.id} clase={clase}/>)
+                        classes.map(clase=><SearchResult key={clase.id} clase={clase} classes={classes} setClasses={setClasses}/>)
                         : <h2 style={{padding:'10px'}}>Empieza a inscribirte a clases para que aparezcan aqui</h2>
                     }
                 </Box>

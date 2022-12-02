@@ -45,14 +45,15 @@ const removeClass = ({id,user_role,token}) => {
     return request.then(response=>response)
 }
 
-const unrollStudent = ({estudianteId,user_role,token}) => {
+const unrollStudent = (classId,userId,{token}) => {
     const config={
         headers:{
             authorization: token
         }
     }
-    const request= axios.put(`${URL}/unrollStudent/${estudianteId}`,{user_role},config)
-    return request.then(response=>response)
+    console.log(classId,userId)
+    const request= axios.put(`${URL}/unrollStudent`,{classId: classId, estudianteId: userId},config)
+    return request.then(response=>console.log(response))
 }
 
 export default {getAllClasses,getOneClass,create,updateClass,removeClass,unrollStudent}

@@ -1,23 +1,55 @@
 import React, { useContext,useState,useEffect } from 'react'
-import {Box, Link,Typography} from '@mui/material'
+import {Box, Link, Typography, Dialog} from '@mui/material'
 import {BiBlock} from 'react-icons/bi'
 import UserContext from '../../context/UserContext'
 import usersService from '../../services/users'
+import commentsService from '../../services/comments'
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import TextField from '@mui/material/TextField';
+import Button from '../../components/Button';
+import DialogActions from '@mui/material/DialogActions';
 
-function CardComentario({comentario}) {
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function CardComentario({comentario,clasePropia}) {
     //Si el comentario esta bloqueado hacer un display none
+
     const {user} = useContext(UserContext)
+    const {token} = user
     const [usuarioComentario,setUsuarioComentario]=useState({})
+
     useEffect(()=>{
         usersService.getUser({id:comentario.usuario})
-        .then(user=>
-          setUsuarioComentario(user)
+        .then(usuario=>
+          setUsuarioComentario(usuario)
         )
       },[])
     
-    const handleToggleComentario=(event)=>{
-        //cambiar estado de comentario
+    const handleBlockearComentario=()=>{
+        /*ENVIAR MAIL*/
+        commentsService.removeComment(comentario.id,{token})
     }
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const [valueInteres, setValueInteres] = useState('');
+
+    const handleChangeText = (event) => {
+        setValueInteres(event.target.value);
+    };
 
     if((Object.keys(usuarioComentario).length===0)){
         return <h1>Cargando</h1>
@@ -82,7 +114,7 @@ function CardComentario({comentario}) {
             }}>
                 {comentario.descripcion}
                 👀
-                {user!==null && user.rol==='profesor'&& 
+                {user!==null && clasePropia && 
                 <Box 
                     component='button'
                     sx={{
@@ -104,12 +136,38 @@ function CardComentario({comentario}) {
                         color: '#2E2C98'
                     } 
                     }}
-                    onClick={handleToggleComentario}
+                    onClick={handleOpen}
                 >
                     <BiBlock/>
                 </Box>
                 }
             </Box>
+                                <Dialog
+                                    open={open}
+                                    TransitionComponent={Transition}
+                                    keepMounted
+                                    onClose={handleClose}
+                                    aria-describedby="alert-dialog-slide-description"
+                                >
+                                <DialogTitle>{"Bloqueo de Comentario"}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText sx={{ marginTop:'10px' }}>
+                                        Motivo por el bloqueo de comentario
+                                    </DialogContentText>
+                                    <TextField
+                                    multiline
+                                    fullWidth
+                                    maxRows={6}
+                                    value={valueInteres}
+                                    onChange={handleChangeText}
+                                    variant="filled"
+                                    />
+                                </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleBlockearComentario} color='success'> Enviar </Button>
+                                        <Button onClick={handleClose} color='error'> Cancelar </Button>
+                                    </DialogActions>
+                                </Dialog>
             <Box>
                 <Link sx={{
                     display: 'inline-block',

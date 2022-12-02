@@ -18,8 +18,8 @@ const approveHiring = (id,{token}) => {
             authorization: token
         }
     }
-    const request = axios.put(`${URL}/approve/${id}`,config)
-    return request.then(response=>response.data)
+    const request = axios.put(`${URL}/approve`,{id},config)
+    return request.then(response=>console.log(response))
 }
 
 const removeHiring = (id,{token}) => {

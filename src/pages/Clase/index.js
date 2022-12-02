@@ -1,5 +1,6 @@
 import React,{useEffect,useState, useContext} from 'react'
-import {Container,CssBaseline,Box,Dialog,IconButton,Typography, List, ListItem} from '@mui/material'
+import dayjs from 'dayjs';
+import {Container,CssBaseline,Box,Dialog,IconButton,Typography, List, ListItem } from '@mui/material'
 import {Link,useParams} from 'react-router-dom';
 import Header from '../../components/Header';
 import { AiFillStar } from 'react-icons/ai';
@@ -11,10 +12,23 @@ import Button from '../../components/Button';
 import CardComentario from '../../components/CardComentario';
 import Comentarios from '../../components/Comentarios';
 import FormComentarios from '../../components/FormComentarios';
-import UserContext from '../../context/UserContext'
 import userEvent from '@testing-library/user-event';
 import useClass from '../../hooks/useClass';
 import { FlareSharp } from '@mui/icons-material';
+import UserContext from '../../context/UserContext';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import TextField from '@mui/material/TextField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function Clase() {
 
@@ -31,11 +45,37 @@ function Clase() {
             })
     },[])
     
-        const caracteristicasClase=[
+    const caracteristicasClase=[
             claseElegida.frecuencia || 'semanal',
             claseElegida.tipo || 'grupal',
             'Superclase'
         ]
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        if(!(!user || user.rol=='profesor' || yaContratado)){
+            setOpen(true);
+        }
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleEnviarContratacion = () => {
+        handleContratar()
+        setOpen(false)
+    }
+
+    const [valueInteres, setValueInteres] = useState('');
+
+    const handleChangeText = (event) => {
+        setValueInteres(event.target.value);
+    };
+
+    const [valueTiempo, setValueTiempo] = useState(dayjs('2018-01-01T00:00:00.000Z'));
+    console.log('tiempo',valueTiempo.hour().toString() + ':' + valueTiempo.minute().toString())
 
     const [yaContratado,setContratado]=useState(false)
     
@@ -45,10 +85,12 @@ function Clase() {
 
     const handleContratar = () => {
         if(!(!user || user.rol=='profesor' || yaContratado)){
+        const horario = valueTiempo.hour().toString() + ':' + valueTiempo.minute().toString()
+        console.log(horario)
         const nuevaContratacion = {
-            motivo:'',
+            motivo: valueInteres,
             claseId: id,
-            horarioReferencia: new Date()
+            horarioReferencia: horario
         };
         const {token}=user
         hiringsService.createHiring(nuevaContratacion,{token});
@@ -333,9 +375,48 @@ function Clase() {
                                 </Box>
                                 </Box>
                             </Box>
-                            <Button disabled={!user || user.rol=='profesor' || yaContratado} onClick={handleContratar}>
+                            <Button disabled={!user || user.rol=='profesor' || yaContratado} onClick={handleClickOpen}>
                                 Contratar
                             </Button>
+                            <Dialog
+                                    open={open}
+                                    TransitionComponent={Transition}
+                                    keepMounted
+                                    onClose={handleClose}
+                                    aria-describedby="alert-dialog-slide-description"
+                                >
+                                <DialogTitle>{"Contratación de Clase"}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText sx={{ marginTop:'10px' }}>
+                                        Horario de referencia para el contacto
+                                    </DialogContentText>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <TimePicker
+                                    value={valueTiempo}
+                                    onChange={setValueTiempo}
+                                    renderInput={(params) => <TextField {...params} />}
+                                    />
+                                    </LocalizationProvider>
+
+
+                                    <DialogContentText sx={{ marginTop:'10px' }}>
+                                        Motivo por el cual esta interesado en la clase
+                                    </DialogContentText>
+                                    <TextField
+                                    multiline
+                                    fullWidth
+                                    maxRows={6}
+                                    value={valueInteres}
+                                    onChange={handleChangeText}
+                                    variant="filled"
+                                    />
+
+                                </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleEnviarContratacion} color='success'> Enviar </Button>
+                                        <Button onClick={handleClose} color='error'> Cancelar </Button>
+                                    </DialogActions>
+                                </Dialog>
                         </Box>
                     </Box>
                 </Box>
