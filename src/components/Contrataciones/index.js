@@ -6,6 +6,8 @@ import hiringsService from '../../services/hirings'
 
 function Contrataciones() {
     const {user} = useContext(UserContext)
+    const {token}=user
+
     const [contratacionesToShow,setContrataciones]=useState([])
 
     useEffect(()=>{
@@ -16,16 +18,16 @@ function Contrataciones() {
     },[])
 
     return (
+    
     <Box sx={{m:2}}>
         <Grid container rowSpacing={3} columnSpacing={3}>
         {console.log('contrataciones:',contratacionesToShow)}
         {
-            
             contratacionesToShow.map(contratacion=>{
                 return(
-                          <Grid key={contratacion.id} item xs={12} sm={4} md={4} lg={3}>
-                            <CardContratacion contratacion={contratacion}/>
-                          </Grid>
+                      <Grid key={contratacion.id} item xs={12} sm={4} md={4} lg={3}>
+                        <CardContratacion contratacion={contratacion} setContrataciones={setContrataciones} contratacionesToShow={contratacionesToShow}/>
+                      </Grid>
                 )
             })
           }

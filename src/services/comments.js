@@ -23,7 +23,7 @@ const blockComment = ({id,token}) => {
     return request.then(response=>response.data)
 }
 
-const removeComment = ({id,token}) => {
+const removeComment = (id,{token}) => {
     const config={
         headers:{
             authorization: token
