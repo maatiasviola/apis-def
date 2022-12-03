@@ -10,12 +10,14 @@ function Comentarios({comentarios}) {
 
   const [clasePropia,setClasePropia]=useState(false)
 
+  const [comentariosToShow, setComentarios]=useState(comentarios)
+
   useEffect(()=>{
     if(user && comentarios.length>0){
       classesService.getOneClass({id:comentarios[0].clase})
       .then(clase => setClasePropia(clase.profesor.usuario.id === user.id))
     }
-  },[])
+  },[comentarios,user])
 
   console.log("COMENTARIOS: ",comentarios)
   return (
@@ -26,7 +28,7 @@ function Comentarios({comentarios}) {
       p: '1.25rem'
       }}
     >
-    {comentarios.map(comentario=><CardComentario key={comentario.id} comentario={comentario} clasePropia={clasePropia} />)}
+    {comentariosToShow.map(comentario=><CardComentario key={comentario.id} comentario={comentario} clasePropia={clasePropia} comentariosToShow={comentariosToShow} setComentarios={setComentarios}/>)}
   </Box>
   )
 }

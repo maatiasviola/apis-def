@@ -22,6 +22,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import Rating from '@mui/material/Rating';
+import {Button as MUIButton} from '@mui/material'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -103,11 +104,9 @@ function Clase() {
 
     const [ratingUsuario, setRating] = useState(0);
 
-    const [ratingHabilitado, setHabilitado] = useState(true)
-
+    const [ratingHabilitado, setHabilitado] = useState(false)
 
     useEffect(()=>{
-        if(Object.keys(claseElegida).length !==0 && user){console.log('condicion',claseElegida.estudiantes.some(estudiante => estudiante == user.id))}
         if (Object.keys(claseElegida).length !==0 && user){
             const calificacionExistente = claseElegida.calificaciones.find(calificacion => calificacion.usuario == user.id)
             if(!calificacionExistente){
@@ -119,8 +118,12 @@ function Clase() {
         }
     },[claseElegida])
 
-    const handleNewRating = (newValue) =>{
+    const handleRating = (newValue) =>{
         setRating(newValue)
+    }
+
+    const handleNewRating = () =>{
+        console.log('valor a ingresar:',ratingHabilitado)
         setHabilitado(false)
         const {token}=user
         const newObject = {
@@ -324,23 +327,35 @@ function Clase() {
                             mt:'2rem'
                             }} 
                         >
-                            <h3>
-                                Calificación de la Clase:
-                            </h3>
-                            <h3>
-                                {calificacionGeneral}
-                            </h3>
                             {Object.keys(claseElegida).length !==0  && user && claseElegida.estudiantes.some(estudiante => estudiante == user.id) &&
                             <div>
                                 <h3> Valora la clase! </h3>
                                 <Rating 
                                     name="Valoración del usuario"
                                     value={ratingUsuario}
-                                    onChange={(event, newValue) => {handleNewRating(newValue)}}
-                                    readOnly={!ratingHabilitado}
+                                    onChange={(event, newValue) => {handleRating(newValue)}}
+                                    //readOnly={!ratingHabilitado}
                                     sx={{
                                         marginBottom: '40px'
                                 }}/>
+                                {claseElegida.calificaciones.find(calificacion => calificacion.usuario == user.id) &&
+                                <MUIButton sx={{
+                                    textAlign: 'center',
+                                    fontSize: '1rem',
+                                    lineHeight: '1.25rem',
+                                    fontWeight: 600,
+                                    borderRadius: 2, 
+                                    p:2,
+                                    background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
+                                    color: 'rgb(255, 255, 255)',
+                                    width: '100%'
+                                    }} 
+                                    disabled={ratingHabilitado}
+                                    onClick={handleNewRating}
+                                >
+                                    Calificar
+                                </MUIButton>
+                                }
                             </div>
                             }
                             <Box sx={{display:'flex'}}>
@@ -371,7 +386,7 @@ function Clase() {
                                             lineHeight:'1.25rem'
                                             }}
                                         >
-                                             clase
+                                            clase
                                         </Typography>
                                     </Box>
                                 

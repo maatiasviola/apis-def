@@ -11,34 +11,33 @@ import Slide from '@mui/material/Slide';
 import TextField from '@mui/material/TextField';
 import Button from '../../components/Button';
 import DialogActions from '@mui/material/DialogActions';
+import { comment } from 'postcss'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function CardComentario({comentario,clasePropia}) {
+function CardComentario({comentario,clasePropia,comentariosToShow,setComentarios}) {
     //Si el comentario esta bloqueado hacer un display none
 
     const {user} = useContext(UserContext)
     
-
     const [usuarioComentario,setUsuarioComentario]=useState({})
 
     useEffect(()=>{
         usersService.getUser({id:comentario.usuario})
-        .then(usuario=>
-          setUsuarioComentario(usuario)
-        )
+        .then(usuario=>setUsuarioComentario(usuario))
       },[])
     
     const handleBlockearComentario=()=>{
         const {token} = user
-        commentsService.removeComment({id: comentario.id}, {token})
+        commentsService.removeComment(comentario.id, {token})
         const newObject = {
             destinatario: usuarioComentario.email,
             motivo: valueInteres
         }
         commentsService.notificarAlumno(newObject)
+        setComentarios(comentariosToShow.filter(comment => comment !== comentario))
         handleClose()
     }
 

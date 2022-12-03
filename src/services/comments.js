@@ -23,14 +23,14 @@ const blockComment = ({id,token}) => {
     return request.then(response=>response.data)
 }
 
-const removeComment = ({id},{token}) => {
+const removeComment = (id,{token}) => {
     console.log('id',id,'token',token)
     const config={
         headers:{
             authorization: token
         }
     }
-    const request= axios.delete(`${URL}/${id}`,config)
+    const request= axios.put(`${URL}/remove/${id}`,{},config)
     return request.then(response=>console.log(response))
 }
 
