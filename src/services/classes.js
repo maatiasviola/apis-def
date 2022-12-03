@@ -67,4 +67,9 @@ const hideClass = (classId,{token}) => {
     return request.then(response=>console.log(response))
 }
 
-export default {getAllClasses,getOneClass,create,updateClass,removeClass,unrollStudent,hideClass}
+const getUserClasses = ({id}) => {
+    const request= axios.get(`${URL}/getUserClasses/${id}`)
+    return request.then(response=>response.data.data)
+}
+
+export default {getAllClasses,getOneClass,create,updateClass,removeClass,unrollStudent,hideClass,getUserClasses}

@@ -54,6 +54,7 @@ function SearchResult({clase,classes,setClasses}) {
                   : <strong>{clase.calificacionPromedio.promedioCalculado}</strong> 
                 }
               </div>
+              <p>Estado: {clase.publicado ? 'Publicada' : 'Despublicada'}</p>
               <div className='searchResult__price'>
                 <h2>${clase.costo} USD /clase</h2>
               </div>

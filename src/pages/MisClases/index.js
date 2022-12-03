@@ -7,8 +7,9 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import './styles.css';
 import { Link } from 'react-router-dom';
-import usersService from '../../services/users'
+import classesService from '../../services/classes'
 import CreateButton from '../../components/CreateButton'
+import { clases } from '../../data/coursesData'
 
 
 
@@ -17,12 +18,9 @@ function MyClases() {
     const [classes,setClasses]=useState([])
 
     useEffect(()=>{
-        usersService.getUser({id:user.id})
-        .then(user=>
-          setClasses(user.clases)
-        )
-      },[])
-
+        classesService.getUserClasses({id:user.id})
+        .then(clases=>setClasses(clases))
+    },[])
 
     return (
     <>
