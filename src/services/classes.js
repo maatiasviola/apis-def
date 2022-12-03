@@ -52,7 +52,7 @@ const unrollStudent = (classId,userId,{token}) => {
         }
     }
     console.log(classId,userId)
-    const request= axios.put(`${URL}/unrollStudent`,{classId: classId, estudianteId: userId},config)
+    const request= axios.put(`${URL}/unrollStudent/${userId}`,{classId: classId},config)
     return request.then(response=>console.log(response))
 }
 

@@ -22,9 +22,9 @@ function CardContratacion({contratacion,setContrataciones,contratacionesToShow})
     };
 
     const handleFinalizar = () => {
-        /*hiringsService.removeHiring(contratacion.id,{token})*/
+        hiringsService.removeHiring(contratacion.id,{token})
         classesService.unrollStudent(contratacion.clase.id,contratacion.usuario.id,{token})
-        /*setContrataciones(contratacionesToShow.filter(hiring => hiring !== contratacion))*/
+        setContrataciones(contratacionesToShow.filter(hiring => hiring !== contratacion))
     }
 
     const handleCancelar = () => {
