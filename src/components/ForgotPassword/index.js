@@ -51,8 +51,10 @@ function ForgotPassword() {
             const respuestaValida= usersService.checkVerificationAnswer(newObject).then(response => 
             {if(response.data.condition == true){
                 setRespuestaValida(true)
-            }}
-            )
+            } else {
+                alert("Respuesta incorrecta")
+            }
+            })
         } else {
             alert("Debe ingresar una respuesta")
         }
