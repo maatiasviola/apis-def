@@ -34,11 +34,14 @@ function Login() {
   //al enviar formulario
   const handleSubmit=(event)=>{
     event.preventDefault()
-    console.log("HOOLA")
-    login({email,password})
-    setShowLogin(false)
-    setEmail('')
-    setPassword('')
+    if(email != '' || password != ''){
+      login({email,password})
+      setShowLogin(false)
+      setEmail('')
+      setPassword('')
+    }else{
+      alert('Datos incompletos')
+    }
   }
 
   //manipular modales

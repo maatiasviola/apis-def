@@ -55,22 +55,38 @@ function SignUp() {
 
   //creacion nuevo usuario
   const handleSubmit=(event)=>{
-    event.preventDefault()
-    console.log('Submit')
-
-    const user_created = usersService.createUser(nuevoUsuario).then(response=>
-    {if(nuevoUsuario.rol === 'alumno') {
-      const new_student = {...nuevoEstudiante, user_identifier: response.id}
-      const student_created = studentsService.createStudent(new_student);
-      console.log(student_created)
-    } else {
-      const new_teacher = {...nuevoProfesor, user_identifier: response.id}
-      const teacher_created = teachersService.createTeacher(new_teacher);
-      console.log(teacher_created)
-    }
-    handleSignUp()
+  event.preventDefault()
+  console.log('Submit')
+  if (
+    (
+    nuevoUsuario.nombre != '' ||
+    nuevoUsuario.apellido != '' ||
+    nuevoUsuario.telofono != '' ||
+    nuevoUsuario.email != '' ||
+    nuevoUsuario.password != '' ||
+    nuevoUsuario.preguntaVerificacion != '' ||
+    nuevoUsuario.respuestaVerificacion != '') || (
+    (nuevoProfesor.titulo != '' || nuevoProfesor.experiencia != '') || 
+    (nuevoEstudiante.fechaNacimiento != '' || nuevoEstudiante.mayorEstudioCursado != '' || nuevoEstudiante.mayorEstudioFinalizado != '')
+    )
+  ) {
+      const user_created = usersService.createUser(nuevoUsuario).then(response=>
+      {if(nuevoUsuario.rol === 'alumno') {
+        const new_student = {...nuevoEstudiante, user_identifier: response.id}
+        const student_created = studentsService.createStudent(new_student);
+        console.log(student_created)
+      } else {
+        const new_teacher = {...nuevoProfesor, user_identifier: response.id}
+        const teacher_created = teachersService.createTeacher(new_teacher);
+        console.log(teacher_created)
+      }
+      handleSignUp()
+      }
+      );
   }
-  );
+  else {
+    alert('Datos incompletos')
+  }
 }
 
     return (

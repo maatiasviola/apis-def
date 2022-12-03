@@ -25,14 +25,17 @@ function ForgotPassword() {
         setEmail(event.target.value)
     }
 
-    const handleSubmitEmail = ()=>{
-        const buscarUsuario= usersService.getUserByEmail({email: email}).then(response => 
-        {if(response){
-            setUsuario(response.data)
-            setPreguntaVerificacion(response.data.preguntaVerificacion)
-            console.log(response.data)
-        }}
-        )
+    const handleSubmitEmail = async ()=>{
+        const buscarUsuario= await usersService.getUserByEmail({email}).then(response =>
+            {if(response.status == 200){
+                setUsuario(response.data)
+                setPreguntaVerificacion(response.data.preguntaVerificacion)
+            } else {
+                console.log(response.status)
+                alert('Usuario no encontrado')
+            }}
+            )
+        console.log(buscarUsuario)
     }
 
     const handleChangeRespuestaVerificacion = (event)=>{
@@ -40,17 +43,21 @@ function ForgotPassword() {
     }
     
     const handleSubmitPregunta = ()=>{
-        const newObject = {
-            email: email,
-            respuestaVerificacion: respuestaVerificacion
+        if(respuestaVerificacion != ''){
+            const newObject = {
+                email: email,
+                respuestaVerificacion: respuestaVerificacion
+            }
+            const respuestaValida= usersService.checkVerificationAnswer(newObject).then(response => 
+            {if(response.data.condition == true){
+                setRespuestaValida(true)
+            } else {
+                alert("Respuesta incorrecta")
+            }
+            })
+        } else {
+            alert("Debe ingresar una respuesta")
         }
-        console.log("Hola")
-        const respuestaValida= usersService.checkVerificationAnswer(newObject).then(response => 
-        {if(response.data.condition == true){
-            console.log("Lo lograste rey")
-            setRespuestaValida(true)
-        }}
-        )
     }
 
     const handleChangeNewPassword=(event)=>{
@@ -60,11 +67,15 @@ function ForgotPassword() {
     const {allUsers,setAllUsers} = useContext(UserContext)
 
     const handleSubmitNewPassword = ()=>{
-        const newObject = {
-            email: email,
-            new_password: newPassword
+        if(newPassword != ''){
+            const newObject = {
+                email: email,
+                new_password: newPassword
+            }
+            const updated_password = usersService.updatePassword(newObject).then(console.log("Contraseña cambiada"))
+        } else {
+            alert("Debe ingresar una contraseña")
         }
-        const updated_password = usersService.updatePassword(newObject).then(console.log("Contraseña cambiada"))
     }
 
     return (

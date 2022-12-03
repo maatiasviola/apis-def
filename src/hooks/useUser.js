@@ -14,7 +14,7 @@ export default function useUser(){
             console.log(user)
             setUser(user)
         }catch(e){
-            console.log('Wrong Credentials')
+            alert('Wrong Credentials')
         }
     },[setUser])
 
