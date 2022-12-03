@@ -123,15 +123,17 @@ function Clase() {
     }
 
     const handleNewRating = () =>{
-        console.log('valor a ingresar:',ratingHabilitado)
-        setHabilitado(false)
-        const {token}=user
-        const newObject = {
-            claseId: claseElegida.id,
-            userId: user.id,
-            valor: ratingUsuario
+        if(ratingHabilitado){
+            console.log('valor a ingresar:',ratingHabilitado)
+            setHabilitado(false)
+            const {token}=user
+            const newObject = {
+                claseId: claseElegida.id,
+                userId: user.id,
+                valor: ratingUsuario
+            }
+            qualificationsService.createQualification(newObject,{token})
         }
-        qualificationsService.createQualification(newObject,{token})
     }
 
     if((Object.keys(claseElegida).length===0)){
@@ -334,11 +336,9 @@ function Clase() {
                                     name="Valoración del usuario"
                                     value={ratingUsuario}
                                     onChange={(event, newValue) => {handleRating(newValue)}}
-                                    //readOnly={!ratingHabilitado}
-                                    sx={{
-                                        marginBottom: '40px'
-                                }}/>
-                                {claseElegida.calificaciones.find(calificacion => calificacion.usuario == user.id) &&
+                                    readOnly={!ratingHabilitado}
+                                />
+                                {!claseElegida.calificaciones.find(calificacion => calificacion.usuario == user.id) &&
                                 <MUIButton sx={{
                                     textAlign: 'center',
                                     fontSize: '1rem',
@@ -348,9 +348,10 @@ function Clase() {
                                     p:2,
                                     background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
                                     color: 'rgb(255, 255, 255)',
-                                    width: '100%'
+                                    width: '100%',
+                                    my: 2 
                                     }} 
-                                    disabled={ratingHabilitado}
+                                    disabled={!ratingHabilitado}
                                     onClick={handleNewRating}
                                 >
                                     Calificar
