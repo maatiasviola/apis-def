@@ -15,15 +15,18 @@ function SearchResult({clase,classes,setClasses}) {
   const {token} = user
   console.log(user)
 
-  const [calificacionGeneral, setCalificacionGeneral] = useState(0);
+  const [publicado, setPublicado] = useState(clase.publicada)
   
   const handleFinalizar = () =>{
-    /*
-        hiringsService.getHiringUsuarioClase(clase.id,user.id).then(/*contratacion => hiringsService.removeHiring(contratacion.id,{token}))
-        classesService.unrollStudent(contratacion.clase.id,contratacion.usuario.id,{token})
-        setClasses(classes.filter(elemento => elemento !== clase)) 
-    */
+    hiringsService.getHiringUsuarioClase(clase.id,user.id).then(contratacion => hiringsService.removeHiring(contratacion.id,{token}))
+    classesService.unrollStudent(clase.id,user.id,{token})
+    setClasses(classes.filter(elemento => elemento !== clase)) 
     }
+
+  const handleEstadoClase = () =>{
+    classesService.hideClass(clase.id,{token})
+    setPublicado(!publicado)
+  }
 
   return (
     <div>
@@ -48,7 +51,7 @@ function SearchResult({clase,classes,setClasses}) {
                 {
                   calificacionGeneral === 0
                   ? <strong> Nueva </strong>
-                  : <strong>{calificacionGeneral}</strong> 
+                  : <strong>{clase.calificacionPromedio.promedioCalculado}</strong> 
                 }
               </div>
               <div className='searchResult__price'>
@@ -75,7 +78,22 @@ function SearchResult({clase,classes,setClasses}) {
       </MUIButton>
       }
       {user.rol === 'profesor' &&
-      <MUIButton sx={{
+      <div>
+        <MUIButton sx={{
+            textAlign: 'right',
+            fontSize: '1rem',
+            lineHeight: '1.25rem',
+            fontWeight: 600,
+            borderRadius: 2, 
+            p:2,
+            background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
+            color: 'rgb(255, 255, 255)',
+            width: '20%'
+          }}
+          onClick={handleFinalizar}>
+          Eliminar clase
+        </MUIButton>
+        <MUIButton sx={{
           textAlign: 'right',
           fontSize: '1rem',
           lineHeight: '1.25rem',
@@ -86,10 +104,10 @@ function SearchResult({clase,classes,setClasses}) {
           color: 'rgb(255, 255, 255)',
           width: '20%'
         }}
-        onClick={handleFinalizar}>
-        Eliminar clase
-      </MUIButton>
-
+        onClick={handleEstadoClase}>
+        {publicado ? 'Despublicar' : 'Publicar'}
+        </MUIButton>
+      </div>
       }
     </div>
   )

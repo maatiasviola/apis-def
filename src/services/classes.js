@@ -56,4 +56,15 @@ const unrollStudent = (classId,userId,{token}) => {
     return request.then(response=>console.log(response))
 }
 
-export default {getAllClasses,getOneClass,create,updateClass,removeClass,unrollStudent}
+const hideClass = (classId,{token}) => {
+    const config={
+        headers:{
+            authorization: token
+        }
+    }
+    console.log(classId)
+    const request= axios.put(`${URL}/hideClass/${classId}`,{},config)
+    return request.then(response=>console.log(response))
+}
+
+export default {getAllClasses,getOneClass,create,updateClass,removeClass,unrollStudent,hideClass}
