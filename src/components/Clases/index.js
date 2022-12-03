@@ -18,7 +18,8 @@ function Clases({categoryFilter, filters}) {
   const classesToShow = classes.filter(clase=> (clase.categoria==categoryFilter 
     && (clase.calificacionPromedio.promedioCalculado >= filters.calificacion1 && clase.calificacionPromedio.promedioCalculado < filters.calificacion2) 
     && ((clase.tipo == filters.tipo) || filters.tipo == "Cualquiera")) 
-    && ((clase.frecuencia == filters.frecuencia) || filters.frecuencia == "Cualquiera"))
+    && ((clase.frecuencia == filters.frecuencia) || filters.frecuencia == "Cualquiera") 
+    && (clase.publicada))
 
     
   return (
