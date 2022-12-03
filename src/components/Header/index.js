@@ -65,7 +65,11 @@ function Header() {
             component='img'
             sx={{
               objectFit: 'contain',
-              height: 50,
+              height: {
+                xs:25,
+                sm:40,
+                md:50
+              },
               ml: '1.25rem',
             }} 
             alt='logo' 
@@ -79,14 +83,26 @@ function Header() {
             
           {/*Se un profesor*/}
           {!isLogged && 
-          <LinkMUI component={Link} to={'/enseñar'}>
+          <LinkMUI component={Link} to={'/enseñar'} sx={{
+            width:{
+              xs: 60,
+              sm:130
+            }
+          }}>
             Se un profesor
           </LinkMUI>
           }
         
           {/*Icono Contrataciones*/}
           {isLogged && user.rol === 'profesor' && 
-            <LinkMUI component={Link} to={'/contrataciones'}>
+            <LinkMUI component={Link} to={'/contrataciones'}  sx={{
+              width:{
+                xs:80,
+                sm:100,
+                md:130,
+                lg:140
+              }
+            }}>
               <IconButton>
                 <FaBook/>
               </IconButton>
@@ -96,7 +112,14 @@ function Header() {
 
           {/*Icono Mis Clases*/}
           {isLogged && 
-            <LinkMUI component={Link} to={'/misClases'}>
+            <LinkMUI component={Link} to={'/misClases'} sx={{
+              width:{
+                xs:80,
+                sm:100,
+                md:130,
+                lg:140
+              }
+            }}>
               <IconButton>
                 <ClassIcon/>
               </IconButton>
@@ -105,14 +128,23 @@ function Header() {
           }
         
           {/*Icono Lenguaje*/}
-          <IconButton>
+          <IconButton sx={{
+            width:{
+              xs:35,
+              sm:50
+            }
+          }}>
             <MdLanguage/>
           </IconButton>
           
           {/*DropDown Menu*/}
           <Button sx={{
               border:'1px solid #ddd',
-              borderRadius:'10px'
+              borderRadius:'10px',
+              width:{
+                xs:80,
+                sm:100
+              }
             }}
             onClick={handleClickDropDownMenu}
           >

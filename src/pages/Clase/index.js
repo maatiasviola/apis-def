@@ -1,6 +1,6 @@
 import React,{useEffect,useState, useContext} from 'react'
 import dayjs from 'dayjs';
-import {Container,CssBaseline,Box,Dialog,Typography} from '@mui/material'
+import {Container,CssBaseline,Box,Dialog,Typography,Grid} from '@mui/material'
 import {useParams} from 'react-router-dom';
 import Header from '../../components/Header';
 import { AiFillStar } from 'react-icons/ai';
@@ -228,7 +228,9 @@ function Clase() {
                         borderBottom: 'rgb(221, 221, 221) 1px solid',
                     }}
                 >
-                    <Box sx={{width:'58.3%'}}>
+                <Grid container>
+                <Grid item xs={12} sm={7}>
+                    <Box>
                         <Box sx={{
                                 pt: '2.25rem',
                                 pb: '1.1rem',
@@ -311,8 +313,9 @@ function Clase() {
                             </Box>
                         </Box>
                     </Box>
+                </Grid>
+                <Grid item xs={12} sm={5}>
                     <Box sx={{
-                        width: '33.33333333333333%',
                         ml: '8.333333333333332%',
                         mr: 0
                         }}
@@ -471,6 +474,8 @@ function Clase() {
                                 </Dialog>
                         </Box>
                     </Box>
+                </Grid>
+                </Grid>
                 </Box>
                 <Box sx={{py:'3rem',borderBottom:' rgb(221, 221, 221) 1px solid'}}>
                     <Box sx={{

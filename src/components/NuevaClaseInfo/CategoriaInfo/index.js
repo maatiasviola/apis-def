@@ -20,7 +20,10 @@ function CategoriaInfo({page,setPage,claseData,setClaseData}) {
             display: 'flex' ,
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
+            width: {
+                xs: '0%',
+                sm: '100%'
+            },
             flexDirection: 'column',
             }}
         >
@@ -78,7 +81,7 @@ function CategoriaInfo({page,setPage,claseData,setClaseData}) {
                             return(
                                 <Grid 
                                     key={categoria.id} 
-                                    item xs={12} sm={4} md={4} lg={3} 
+                                    item xs={6} sm={4} md={4} lg={3} 
                                     style={{height:'100%'}}
                                     onClick={(e)=>setClaseData({...claseData,categoria:categoria.id.toString()})}
                                 >    

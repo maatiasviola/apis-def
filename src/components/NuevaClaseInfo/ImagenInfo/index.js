@@ -16,14 +16,17 @@ function ImagenInfo({page,setPage,claseData,setClaseData}) {
             display: 'flex'
         }}>
             <Box sx={{
-                 background: 'url(https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png) 0% 0% / 100% 100% no-repeat !important',
-                 height: '100vh' ,
-                 justifyContent: 'center' ,
-                 display: 'flex' ,
-                 justifyContent: 'center',
-                 alignItems: 'center',
-                 width: '100%',
-                 flexDirection: 'column',
+                    background: 'url(https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png) 0% 0% / 100% 100% no-repeat !important',
+                    height: '100vh' ,
+                    justifyContent: 'center' ,
+                    display: 'flex' ,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: {
+                        xs: '0%',
+                        sm: '100%'
+                    },
+                    flexDirection: 'column',
             }}>
                 <Box sx={{
                         ml: 'min(10%, 56)',

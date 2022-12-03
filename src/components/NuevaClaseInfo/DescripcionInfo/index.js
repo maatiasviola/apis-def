@@ -20,7 +20,10 @@ function DescripcionInfo({page,setPage,claseData,setClaseData}) {
             display: 'flex' ,
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
+            width: {
+                xs: '0%',
+                sm: '100%'
+            },
             flexDirection: 'column',
             }}
         >
@@ -32,11 +35,11 @@ function DescripcionInfo({page,setPage,claseData,setClaseData}) {
             }}
         >
             <Box sx={{
-                 ml: 'min(10%, 56)',
-                 maxWidth: '75%',
-                 mr: '1.5rem',
-                 width: '100%',
-                 color: 'rgb(255, 255, 255)'
+                    ml: 'min(10%, 56)',
+                    maxWidth: '75%',
+                    mr: '1.5rem',
+                    width: '100%',
+                    color: 'rgb(255, 255, 255)'
             }}>
                 <Typography 
                     component='h1'

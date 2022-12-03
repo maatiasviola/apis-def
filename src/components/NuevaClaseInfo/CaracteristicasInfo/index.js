@@ -35,9 +35,11 @@ function CaracteristicasInfo({page,setPage,claseData,setClaseData}) {
             justifyContent: 'center' ,
             display: 'flex' ,
             alignItems: 'center',
-            width: '100%' ,
+            width: {
+                xs: '0%',
+                sm: '100%'
+            },
             maxWidth: 720 ,
-            minWidth: 100 ,
             flexDirection: 'column',
             }}
         >
@@ -45,7 +47,10 @@ function CaracteristicasInfo({page,setPage,claseData,setClaseData}) {
                 ml: 'min(10%, 56)',
                 maxWidth: '75%',
                 mr: '1.5rem',
-                width: '100%',
+                width: {
+                    xs: '0%',
+                    sm: '100%'
+                },
                 color: 'rgb(255, 255, 255)',
                 }}
             >

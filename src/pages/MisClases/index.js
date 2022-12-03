@@ -43,7 +43,6 @@ function MyClases() {
                     }}
                 >
                 <div className='searchPage__info'>
-                    <p>{classes.length} · 232 alumnos inscriptos</p>
                     <h1 sx={{mb:1}}>Mis Clases</h1>    
                     { user.rol === 'profesor' &&
                     <Link to={`/clases/creacion`}>

@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 
 import Header from '../../components/Header';
-import {Typography} from '@mui/material'
+import {Typography, Grid} from '@mui/material'
 import { CssBaseline,Box,Container } from '@mui/material';
 import {FaqList} from './FaqList'
 import FaqAccordion from '../../components/FaqAccordion';
@@ -42,24 +42,35 @@ function Faq() {
                         alignItems:'center'
                         }}
                     >
-                        <img 
-                        src='https://img.freepik.com/free-vector/website-faq-section-user-help-desk-customer-support-frequently-asked-questions-problem-solution-quiz-game-confused-man-cartoon-character_335657-1602.jpg' alt='FAQ' 
-                        style={{
-                            width: '100%',
-                            maxWidth: '400px',
-                            height: 'auto'
-                            }}
-                        />
-                        <Box sx={{display:'flex',flexDirection:'column'}}>
-                            {FaqList.map(faq=>
-                                <FaqAccordion 
-                                    key={faq.id} 
-                                    faq={faq} 
-                                    handleChange={handleChange} 
-                                    expanded={expanded}
+                        <Grid container>
+                            <Grid item xs={12} sm={4} sx={{
+                                display:'flex',
+                                justifyContent:'center',
+                                flexDirection:'row',
+                                alignItems:'center'
+                            }}>
+                            <img 
+                                src='https://img.freepik.com/free-vector/website-faq-section-user-help-desk-customer-support-frequently-asked-questions-problem-solution-quiz-game-confused-man-cartoon-character_335657-1602.jpg' alt='FAQ' 
+                                style={{
+                                    width: '100%',
+                                    maxWidth: '400px',
+                                    height: 'auto'
+                                }}
                                 />
-                            )}
-                        </Box>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                                <Box sx={{display:'flex',flexDirection:'column'}}>
+                                    {FaqList.map(faq=>
+                                        <FaqAccordion 
+                                            key={faq.id} 
+                                            faq={faq} 
+                                            handleChange={handleChange} 
+                                            expanded={expanded}
+                                        />
+                                    )}
+                                </Box>
+                            </Grid>
+                        </Grid>
                     </Box>
                 </Container>
             </Box>

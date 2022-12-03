@@ -4,6 +4,7 @@ import './styles.css'
 import studentImage from './studentImage.jpg'
 import {ReactComponent as ReactLogo} from "./airbnb.svg"
 import serProfesor from './serProfesor.jpg'
+import Header from '../../components/Header'
 
 function SerProfesor() {
 
@@ -21,6 +22,7 @@ function SerProfesor() {
 
   return (
     <div className="App">
+      <Header/>
       <div className='elementsContainer' style={backgroundImageStyle}>
           <div className='mainElements'>
             <div className='logo_div'>

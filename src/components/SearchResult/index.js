@@ -5,7 +5,7 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import {Link as LinkMUI} from '@mui/material'
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
-import {Button as MUIButton} from '@mui/material'
+import {Button as MUIButton, Grid} from '@mui/material'
 import hiringsService from '../../services/hirings'
 import classesService from '../../services/classes'
 
@@ -32,7 +32,11 @@ function SearchResult({clase,classes,setClasses}) {
     <div>
       <LinkMUI component={Link} to={`/clases/${clase.id}`}>
       <div className='searchResult'>
+      <Grid container>
+        <Grid item>
         <img src={clase.imagen} alt={clase.nombre}/>
+        </Grid>
+        <Grid item>
         {user.rol === 'profesor' &&
         <Link to={`/clases/edicion/${clase.id}`}>
           <EditRoundedIcon color='black' className='searchResult__edit'/>
@@ -60,11 +64,13 @@ function SearchResult({clase,classes,setClasses}) {
               </div>
             </div>
         </div>
+        </Grid>
+      </Grid>
       </div>
       </LinkMUI>
       {user.rol === 'alumno' &&
         <MUIButton sx={{
-          textAlign: 'right',
+          textAlign: 'center',
           fontSize: '1rem',
           lineHeight: '1.25rem',
           fontWeight: 600,
@@ -72,7 +78,11 @@ function SearchResult({clase,classes,setClasses}) {
           p:2,
           background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
           color: 'rgb(255, 255, 255)',
-          width: '20%'
+          width: {
+            xs:'100%',
+            sm:'50',
+            md:'25%'
+          }
         }}
         onClick={handleFinalizar}>
         Finalizar clase
@@ -81,7 +91,7 @@ function SearchResult({clase,classes,setClasses}) {
       {user.rol === 'profesor' &&
       <div>
         <MUIButton sx={{
-            textAlign: 'right',
+            textAlign: 'center',
             fontSize: '1rem',
             lineHeight: '1.25rem',
             fontWeight: 600,
@@ -89,13 +99,17 @@ function SearchResult({clase,classes,setClasses}) {
             p:2,
             background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
             color: 'rgb(255, 255, 255)',
-            width: '20%'
+            width: {
+              xs:'100%',
+              sm:'50',
+              md:'25%'
+            }
           }}
           onClick={handleFinalizar}>
           Eliminar clase
         </MUIButton>
         <MUIButton sx={{
-          textAlign: 'right',
+          textAlign: 'center',
           fontSize: '1rem',
           lineHeight: '1.25rem',
           fontWeight: 600,
@@ -103,7 +117,11 @@ function SearchResult({clase,classes,setClasses}) {
           p:2,
           background: 'linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)',
           color: 'rgb(255, 255, 255)',
-          width: '20%'
+          width: {
+            xs:'100%',
+            sm:'50',
+            md:'25%'
+          }
         }}
         onClick={handleEstadoClase}>
         {publicado ? 'Despublicar' : 'Publicar'}

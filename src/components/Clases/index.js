@@ -28,7 +28,7 @@ function Clases({categoryFilter, filters}) {
         {
             classesToShow.map(clase=>{
                 return(
-                  <Grid key={clase.id} item xs={12} sm={4} md={4} lg={3}>
+                  <Grid key={clase.id} item xs={12} sm={6} md={4} lg={3}>
                     <CardClase clase={clase}/>
                   </Grid>
                 )

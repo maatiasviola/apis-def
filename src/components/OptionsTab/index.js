@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {scrollableOptions} from '../../data/scrollableDataOptions'
-import {Box,Tab,Button,Container,Tabs} from '@mui/material';
+import {Box,Tab,Button,Container,Tabs,Grid} from '@mui/material';
 import {tabsClasses} from '@mui/material/Tabs';
 import { FaFilter } from 'react-icons/fa';
 
@@ -41,9 +41,9 @@ function OptionsTab({setCategoryFilter,showFiltersModal}) {
                     scrollButtons //left and right scroll buttons aparecen automaticamente
                     sx={{
                         [`& .${tabsClasses.scrollButtons}`]: {
-                          '&.Mui-disabled': { opacity: 0.3 },
+                            '&.Mui-disabled': { opacity: 0.3 },
                         },
-                      }}
+                    }}
                 >
                     {scrollableOptions.map((tab)=>{
                         return <Tab key={tab.id} icon={tab.icon} label={tab.label} />
@@ -52,7 +52,7 @@ function OptionsTab({setCategoryFilter,showFiltersModal}) {
                 </Tabs>
                 <Button
                     sx={{
-                        display:{xs:'none',md:'block'},
+                        display:{xs:'block',md:'block'},
                         border: '1px solid #ddd',
                         minWidth:90,
                         justifyContent:'space-between',
