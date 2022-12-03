@@ -43,15 +43,19 @@ function ForgotPassword() {
     }
     
     const handleSubmitPregunta = ()=>{
-        const newObject = {
-            email: email,
-            respuestaVerificacion: respuestaVerificacion
+        if(respuestaVerificacion != ''){
+            const newObject = {
+                email: email,
+                respuestaVerificacion: respuestaVerificacion
+            }
+            const respuestaValida= usersService.checkVerificationAnswer(newObject).then(response => 
+            {if(response.data.condition == true){
+                setRespuestaValida(true)
+            }}
+            )
+        } else {
+            alert("Debe ingresar una respuesta")
         }
-        const respuestaValida= usersService.checkVerificationAnswer(newObject).then(response => 
-        {if(response.data.condition == true){
-            setRespuestaValida(true)
-        }}
-        )
     }
 
     const handleChangeNewPassword=(event)=>{
