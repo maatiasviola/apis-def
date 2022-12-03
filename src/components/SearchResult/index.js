@@ -49,7 +49,7 @@ function SearchResult({clase,classes,setClasses}) {
               <div className='searchResult__star'>
                 <StarIcon className='starIcon'/>
                 {
-                  calificacionGeneral === 0
+                  clase.calificacionPromedio.promedioCalculado === 0
                   ? <strong> Nueva </strong>
                   : <strong>{clase.calificacionPromedio.promedioCalculado}</strong> 
                 }
