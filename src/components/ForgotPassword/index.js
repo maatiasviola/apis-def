@@ -47,10 +47,8 @@ function ForgotPassword() {
             email: email,
             respuestaVerificacion: respuestaVerificacion
         }
-        console.log("Hola")
         const respuestaValida= usersService.checkVerificationAnswer(newObject).then(response => 
         {if(response.data.condition == true){
-            console.log("Lo lograste rey")
             setRespuestaValida(true)
         }}
         )
@@ -63,11 +61,15 @@ function ForgotPassword() {
     const {allUsers,setAllUsers} = useContext(UserContext)
 
     const handleSubmitNewPassword = ()=>{
-        const newObject = {
-            email: email,
-            new_password: newPassword
+        if(newPassword != ''){
+            const newObject = {
+                email: email,
+                new_password: newPassword
+            }
+            const updated_password = usersService.updatePassword(newObject).then(console.log("Contraseña cambiada"))
+        } else {
+            alert("Debe ingresar una contraseña")
         }
-        const updated_password = usersService.updatePassword(newObject).then(console.log("Contraseña cambiada"))
     }
 
     return (
