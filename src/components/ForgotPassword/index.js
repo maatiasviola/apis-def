@@ -25,14 +25,17 @@ function ForgotPassword() {
         setEmail(event.target.value)
     }
 
-    const handleSubmitEmail = ()=>{
-        const buscarUsuario= usersService.getUserByEmail({email: email}).then(response => 
-        {if(response){
-            setUsuario(response.data)
-            setPreguntaVerificacion(response.data.preguntaVerificacion)
-            console.log(response.data)
-        }}
-        )
+    const handleSubmitEmail = async ()=>{
+        const buscarUsuario= await usersService.getUserByEmail({email}).then(response =>
+            {if(response.status == 200){
+                setUsuario(response.data)
+                setPreguntaVerificacion(response.data.preguntaVerificacion)
+            } else {
+                console.log(response.status)
+                alert('Usuario no encontrado')
+            }}
+            )
+        console.log(buscarUsuario)
     }
 
     const handleChangeRespuestaVerificacion = (event)=>{
